@@ -28,6 +28,7 @@ shared class Scene(width = 600.0, height = 400.0, depthBuffer = false,
 		Group root = Group();
 		root.children.setAll(*children);
 		value actualScene = JScene(root, width, height, depthBuffer);
+		actualScene.fill = fill;
 		return actualScene;
 	}
 	

@@ -31,7 +31,7 @@ shared class CeylonFX(stage, Boolean showNow = true, String?* args) {
 		if (exists d = stage.delegate) {
 			print("App started!!!");
 			if (showNow) {
-				d.show();
+				d.centerOnScreen();
 			}
 		} else {
 			throw Exception("Could not start CeylonFX Application");	

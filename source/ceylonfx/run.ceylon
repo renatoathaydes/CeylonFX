@@ -25,7 +25,8 @@ shared void run() {
 			title = "CeylonFX Demo Application";
 			Scene {
 				fill = blue;
-				Text(50.0, 200.0, "Welcome to CeylonFX")
+				Text(50.0, 200.0, "Welcome to CeylonFX"),
+				Text(50.0, 250.0, "Under construction...")
 			};
 			
 		};
