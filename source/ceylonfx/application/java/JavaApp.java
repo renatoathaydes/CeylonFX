@@ -1,4 +1,4 @@
-package ceylonfx.application;
+package ceylonfx.application.java;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,6 @@ public class JavaApp extends Application {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("Launching application");
 				launch(JavaApp.class, args);
 			}
 		}).start();

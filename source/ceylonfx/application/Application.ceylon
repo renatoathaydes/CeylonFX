@@ -1,4 +1,5 @@
-import ceylonfx.application {
+
+import ceylonfx.application.java {
 	JavaApp {
 		initialize
 	}
@@ -11,13 +12,8 @@ import ceylonfx.utils {
 }
 
 import javafx.scene {
-	Node,
-	Scene
+	Node
 }
-import javafx.stage {
-	Window
-}
-import com.sun.javafx.beans.annotations { delegate }
 
 "Application class from which CeylonFX applications extend."
 shared class CeylonFX(stage, Boolean showNow = true, String?* args) {
