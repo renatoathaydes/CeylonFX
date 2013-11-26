@@ -17,6 +17,7 @@ import javafx.scene {
 import javafx.stage {
 	Window
 }
+import com.sun.javafx.beans.annotations { delegate }
 
 "Application class from which CeylonFX applications extend."
 shared class CeylonFX(stage, Boolean showNow = true, String?* args) {
@@ -49,8 +50,24 @@ shared class CeylonFX(stage, Boolean showNow = true, String?* args) {
 }
 
 shared interface CeylonFxAdapter<out Delegate>
-		given Delegate of Node|Window|Scene {
+		given Delegate satisfies Object {
 	
 	shared formal Delegate? delegate;
 	
+}
+
+shared {Node*} asNodes({Node|CeylonFxAdapter<Node>*} mixed) {
+	value nodes = { for(node in mixed) asType<Node>(node) };
+	return { for(node in nodes) if (exists node) node };
+}
+
+shared Type? asType<out Type>(Type|CeylonFxAdapter<Type> toConvert)
+	given Type satisfies Object {
+	if (is Type toConvert) {
+		return toConvert;
+	}
+	if (is CeylonFxAdapter<Type> toConvert, exists del = toConvert.delegate) {
+		return del;
+	}
+	return null;
 }

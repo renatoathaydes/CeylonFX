@@ -1,5 +1,6 @@
 import ceylonfx.application {
-	CeylonFxAdapter
+	CeylonFxAdapter,
+	asNodes
 }
 
 import javafx.scene {
@@ -22,14 +23,16 @@ shared class Scene(width = 600.0, height = 400.0, depthBuffer = false,
 	shared Float height;
 	shared Boolean depthBuffer;
 	shared Paint fill;
-	shared {Node*} children;
+	shared {Node|CeylonFxAdapter<Node>*} children;
 	
-	shared actual JScene delegate {
-		Group root = Group();
-		root.children.setAll(*children);
+	Group root = Group();
+	root.children.setAll(*asNodes(children));
+	
+	shared actual JScene delegate => createActualScene();
+	
+	JScene createActualScene() {
 		value actualScene = JScene(root, width, height, depthBuffer);
 		actualScene.fill = fill;
 		return actualScene;
 	}
-	
 }
