@@ -1,16 +1,59 @@
-import javafx.scene.paint { CycleMethod { noCycle = \iNO_CYCLE }, Stop, JLinearGrad = LinearGradient, Color { white = \iWHITE, yellow = \iYELLOW }, JPaint = Paint }
-import ceylonfx.application { CeylonFxAdapter }
+import ceylonfx.application {
+    CeylonFxAdapter
+}
 
-shared abstract class Paint() satisfies CeylonFxAdapter<JPaint> {}
+import javafx.scene.paint {
+    CycleMethod {
+        noCycle=NO_CYCLE
+    },
+    Stop,
+    JLinearGrad=LinearGradient,
+    JRadialGrad=RadialGradient,
+    Color {
+        white=WHITE,
+        yellow=YELLOW
+    },
+    JPaint=Paint
+}
 
-shared class LinearGradient(Float startX = 0.0, Float startY = 0.0,
-	Float endX = 1.0, Float endY = 0.0, Boolean proportional = true,
-	CycleMethod cycleMethod = noCycle, {[Float, Color]*} stops = {[0.0, white], [1.0, yellow]})
+shared abstract class Paint() 
+        satisfies CeylonFxAdapter<JPaint> {}
+
+{Stop*} jStops({[Float, Color]*} stops)
+        => { for (elem in stops) Stop(elem[0], elem[1]) };
+
+shared class LinearGradient(
+    [Float,Float] start = [0.0, 0.0],
+	[Float,Float] end = [1.0, 0.0], 
+	Boolean proportional = true,
+	CycleMethod cycleMethod = noCycle, 
+	{[Float, Color]*} stops = 
+			{[0.0, white], [1.0, yellow]})
 		extends Paint() {
 	
-	value actualStops = { for(elem in stops) Stop(elem[0], elem[1]) };
+	delegate => JLinearGrad(
+		start[0], start[1],
+		end[0], end[1], 
+		proportional, cycleMethod, 
+		*jStops(stops));
 	
-	shared actual JLinearGrad delegate = JLinearGrad(startX, startY,
-		endX, endY, proportional, cycleMethod, *actualStops);
-	
+}
+
+shared class RadialGradient(
+    Float focusAngle = 0.0, 
+    Float focusDistance = 0.0, 
+    [Float,Float] center = [0.0,0.0], 
+    Float radius = 1.0, 
+    Boolean proportional = true,
+    CycleMethod cycleMethod = noCycle, 
+	{[Float, Color]*} stops = 
+			{[0.0, white], [1.0, yellow]}) 
+        extends Paint() {
+    
+    delegate => JRadialGrad(
+        focusAngle, focusDistance,
+        center[0], center[1], radius, 
+        proportional, cycleMethod, 
+        *jStops(stops));
+    
 }
