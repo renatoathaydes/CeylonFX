@@ -15,7 +15,7 @@ import javafx.scene {
 	Node
 }
 
-"Application class from which CeylonFX applications extend."
+"Application class which is the root of all CeylonFX applications."
 shared class CeylonFX(stage, Boolean showNow = true, String?* args) {
 
 	shared Stage stage;
@@ -52,7 +52,9 @@ shared interface CeylonFxAdapter<out Delegate>
 	
 }
 
-shared {Node*} asNodes({Node|CeylonFxAdapter<Node>*} mixed) {
+shared alias CeylonNode => CeylonFxAdapter<Node>;
+
+shared {Node*} asNodes({Node|CeylonNode*} mixed) {
 	value nodes = { for(node in mixed) asType<Node>(node) };
 	return { for(node in nodes) if (exists node) node };
 }
