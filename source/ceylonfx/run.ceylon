@@ -24,15 +24,16 @@ import javafx.scene.text { Font }
 shared void run() {
 	value largeFont = Font("Arial", 48.0);
 	value smallFont = Font("Arial", 12.0);
-	value mainFill = LinearGradient { [0.0, blue], [1.0, cyan] };
+	value mainFill = LinearGradient { [0.0, blue], [0.75, cyan], [1.0, white] };
 	
 	CeylonFX {
+		args = ["args", "for", "App"];
 		Stage {
 			title = "CeylonFX Demo Application";
 			Scene {
-				fill = black; width = 600.0; height = 150.0;
-				Text(50.0, 50.0, "Welcome to CeylonFX", largeFont, mainFill),
-				Text(50.0, 100.0, "Under construction...", smallFont, white)
+				fill = black; dimension = [600.0, 150.0];
+				Text([50.0, 50.0], "Welcome to CeylonFX", largeFont, mainFill),
+				Text([50.0, 100.0], "Under construction...", smallFont, white)
 			};
 			
 		};

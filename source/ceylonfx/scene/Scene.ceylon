@@ -15,12 +15,13 @@ import javafx.scene.paint {
 	}
 }
 
-shared class Scene(width = 600.0, height = 400.0, depthBuffer = false,
+shared class Scene(dimension = [600.0, 400.0], depthBuffer = false,
 	fill = white, children = [])
 		satisfies CeylonFxAdapter<JScene> {
 	
-	shared Float width;
-	shared Float height;
+	shared [Float, Float] dimension;
+	shared Float width = dimension[0];
+	shared Float height = dimension[1];
 	shared Boolean depthBuffer;
 	shared Paint fill;
 	shared {Node|CeylonNode*} children;
