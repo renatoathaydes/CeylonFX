@@ -9,12 +9,14 @@ import javafx.scene.paint {
     Stop,
     JLinearGrad=LinearGradient,
     JRadialGrad=RadialGradient,
+    JImagePattern=ImagePattern,
     Color {
         white=WHITE,
         yellow=YELLOW
     },
     JPaint=Paint
 }
+import javafx.scene.image { Image }
 
 shared abstract class Paint() 
         satisfies CeylonFxAdapter<JPaint> {}
@@ -42,7 +44,7 @@ shared class LinearGradient(
 shared class RadialGradient(
     Float focusAngle = 0.0, 
     Float focusDistance = 0.0, 
-    [Float,Float] center = [0.0,0.0], 
+    [Float,Float] center = [0.0, 0.0], 
     Float radius = 1.0, 
     Boolean proportional = true,
     CycleMethod cycleMethod = noCycle, 
@@ -55,5 +57,20 @@ shared class RadialGradient(
         center[0], center[1], radius, 
         proportional, cycleMethod, 
         *jStops(stops));
+    
+}
+
+shared class ImagePattern(
+    Image image, 
+    [Float,Float,Float,Float] anchorRectangle = 
+            [0.0, 0.0, 1.0, 1.0],
+    Boolean proportional = true)
+        extends Paint() {
+    
+    delegate => JImagePattern(
+        image, 
+        anchorRectangle[0], anchorRectangle[1], 
+        anchorRectangle[2], anchorRectangle[3], 
+        proportional);
     
 }
