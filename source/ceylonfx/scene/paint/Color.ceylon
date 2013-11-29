@@ -8,7 +8,7 @@ shared abstract class Color() extends Paint() {
 	
 }
 
-shared Color gray(Float gray, Float opacity = 1.0) =>
+shared Color grayColor(Float gray, Float opacity = 1.0) =>
 		colorFor(JColor.gray(gray, opacity));
 
 shared Color rgb(Integer red, Integer green, Integer blue) =>
