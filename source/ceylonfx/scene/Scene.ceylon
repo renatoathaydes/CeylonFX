@@ -17,7 +17,7 @@ import javafx.scene.paint {
 
 shared class Scene(dimension = [600.0, 400.0], depthBuffer = false,
 	fill = white, children = [])
-		satisfies CeylonFxAdapter<JScene> {
+		extends CeylonFxAdapter<JScene>() {
 	
 	shared [Float, Float] dimension;
 	shared Float width = dimension[0];
@@ -29,9 +29,7 @@ shared class Scene(dimension = [600.0, 400.0], depthBuffer = false,
 	Group root = Group();
 	root.children.setAll(*asNodes(children));
 	
-	shared actual JScene delegate => createActualScene();
-	
-	JScene createActualScene() {
+	shared actual JScene createDelegate() {
 		value actualScene = JScene(root, width, height, depthBuffer);
 		actualScene.fill = asType<Paint>(fill);
 		return actualScene;

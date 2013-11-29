@@ -45,10 +45,23 @@ shared class CeylonFX(stage, Boolean showNow = true, String?* args) {
 	
 }
 
-shared interface CeylonFxAdapter<out Delegate>
+shared abstract class CeylonFxAdapter<out Delegate>()
 		given Delegate satisfies Object {
 	
-	shared formal Delegate? delegate;
+	shared formal Delegate createDelegate();
+	
+	variable Delegate? instance = null;
+	
+	shared Delegate delegate => lazyDelegate();
+	
+	Delegate lazyDelegate() {
+		if (exists delegate = instance) {
+			return delegate;
+		} else {
+			instance = createDelegate();
+			return lazyDelegate();
+		}
+	}
 	
 }
 
@@ -64,8 +77,8 @@ shared Type? asType<out Type>(Type|CeylonFxAdapter<Type> toConvert)
 	if (is Type toConvert) {
 		return toConvert;
 	}
-	if (is CeylonFxAdapter<Type> toConvert, exists del = toConvert.delegate) {
-		return del;
+	if (is CeylonFxAdapter<Type> toConvert) {
+		return toConvert.delegate;
 	}
 	return null;
 }
