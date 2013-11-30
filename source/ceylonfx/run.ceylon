@@ -19,8 +19,8 @@ import ceylonfx.stage {
     Stage
 }
 
-shared void run() =>
-        CeylonFX {
+shared void run() 
+        => CeylonFX {
     args = ["args", "for", "App"];
     Stage {
         title = "CeylonFX Demo Application";
