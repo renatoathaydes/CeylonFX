@@ -28,3 +28,5 @@ shared object verticalTop
         extends VerticalPosition(VPos.\iTOP) {}
 
 shared alias Position => [HorizontalPosition, VerticalPosition];
+shared alias Location => [Float, Float];
+shared alias Dimension => [Float, Float];

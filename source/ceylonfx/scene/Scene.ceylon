@@ -3,8 +3,11 @@ import ceylonfx.application {
     asNodes,
     CeylonNode
 }
+import ceylonfx.geometry {
+    Dimension
+}
 import ceylonfx.scene.paint {
-	Paint,
+    Paint,
     white
 }
 
@@ -15,7 +18,7 @@ import javafx.scene {
 }
 
 shared class Scene(
-	[Float, Float] dimension = [600.0, 400.0],
+	Dimension dimension = [600.0, 400.0],
 	Boolean depthBuffer = false,
 	Paint fill = white,
 	{Node|CeylonNode*} children = [])

@@ -2,23 +2,24 @@ import javafx.scene.paint {
 	JColor=Color { ... }
 }
 
-shared abstract class Color() extends Paint() {
-	
+shared abstract class Color() 
+        extends Paint() {
 	shared actual formal JColor createDelegate();
-	
 }
 
-shared Color grayShade(Float gray, Float opacity = 1.0) =>
-		colorFor(JColor.gray(gray, opacity));
+shared Color grayShade(Float gray, Float opacity = 1.0) 
+        => colorFor(JColor.gray(gray, opacity));
 
-shared Color rgb(Integer red, Integer green, Integer blue) =>
-		colorFor(JColor.rgb(red, green, blue));
+shared Color rgb(Integer red, Integer green, Integer blue) 
+        => colorFor(JColor.rgb(red, green, blue));
 
-shared Color web(String colorString, Float opacity = 1.0) =>
-		colorFor(JColor.web(colorString, opacity));
+shared Color web(String colorString, Float opacity = 1.0) 
+        => colorFor(JColor.web(colorString, opacity));
 
 Color colorFor(JColor jColor) {
-	object result extends Color() { createDelegate() => jColor; }
+	object result extends Color() {
+		createDelegate() => jColor;
+	}
 	return result;
 }
 

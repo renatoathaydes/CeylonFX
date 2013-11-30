@@ -4,7 +4,8 @@ import ceylonfx.application {
 }
 import ceylonfx.geometry {
     VerticalPosition,
-    verticalBaseline
+    verticalBaseline,
+    Location
 }
 import ceylonfx.scene.paint {
     black
@@ -23,7 +24,7 @@ import javafx.scene.text {
 shared class Text(
     String text,
 	Font font = package.font("Arial", 18.0), 
-	[Float, Float] location = [0.0, 0.0], 
+	Location location = [0.0, 0.0], 
 	Paint|CeylonFxAdapter<Paint> fill = black,
 	Boolean underline = false,
 	Boolean strikethrough = false,
