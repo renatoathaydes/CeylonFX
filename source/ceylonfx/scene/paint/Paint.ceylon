@@ -13,6 +13,7 @@ import javafx.scene.paint {
 	JPaint=Paint
 }
 import javafx.scene.image { Image }
+import ceylonfx.scene.paint { ... }
 
 shared abstract class Paint() 
 		extends CeylonFxAdapter<JPaint>() {}

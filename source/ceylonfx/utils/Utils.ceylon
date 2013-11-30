@@ -1,4 +1,4 @@
-import java.lang { Runnable }
+import java.lang { Runnable, Bool=Boolean }
 import javafx.application { Platform }
 import java.util.concurrent { CountDownLatch }
 
@@ -21,4 +21,11 @@ shared Runnable asRunnable(Anything toRun(Object* args)) {
 		shared actual void run() { toRun(); }
 	}
 	return runnable;
+}
+
+shared Boolean fromJavaBool(Bool? boolean) {
+	if (exists b = boolean) {
+		return b.booleanValue();
+	}
+	return false;
 }

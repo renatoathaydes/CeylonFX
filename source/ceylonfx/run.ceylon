@@ -4,6 +4,9 @@ import ceylonfx.application {
 import ceylonfx.scene {
     Scene
 }
+import ceylonfx.scene.text {
+	Text, font
+}
 import ceylonfx.scene.paint {
     LinearGradient,
     black,
@@ -11,14 +14,9 @@ import ceylonfx.scene.paint {
     cyan,
     white
 }
-import ceylonfx.scene.text {
-    Text,
-    font
-}
 import ceylonfx.stage {
     Stage
 }
-
 
 "Run the module `ceylonfx`."
 shared void run() =>
@@ -38,5 +36,5 @@ shared void run() =>
 			};
 			
 		};
+		
 	};
-    

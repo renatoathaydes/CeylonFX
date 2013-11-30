@@ -1,6 +1,3 @@
-import ceylonfx.application {
-	CeylonFxAdapter
-}
 import ceylonfx.scene {
 	Scene
 }
