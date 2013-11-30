@@ -6,28 +6,33 @@ import ceylonfx.scene.paint {
     black
 }
 
+import javafx.geometry {
+    VPos
+}
 import javafx.scene.paint {
     Paint
 }
 import javafx.scene.text {
-    JText=Text, FontSmoothingType, TextBoundsType, TextAlignment
+    JText=Text,
+    JFontSmoothingType=FontSmoothingType,
+    JTextBoundsType=TextBoundsType,
+    JTextAlignment=TextAlignment
 }
-import javafx.geometry { VPos }
 
 shared class Text(
-    String text = "",
+    String text,
 	Font font = package.font("Arial", 18.0), 
 	[Float, Float] location = [0.0, 0.0], 
 	Paint|CeylonFxAdapter<Paint> fill = black,
 	Boolean underline = false,
 	Boolean strikethrough = false,
 	Float? wrappingWidth = null,
-	FontSmoothingType fontSmoothingType = FontSmoothingType.\iGRAY,
-	TextBoundsType textBoundsType = TextBoundsType.\iLOGICAL,
-	TextAlignment textAlignment = TextAlignment.\iLEFT,
+	FontSmoothing fontSmoothing = graySmoothing,
+	TextBounds textBoundsType = logicalBounds,
+	TextAlignment textAlignment = left,
 	VPos textOrigin = VPos.\iBASELINE)
         extends CeylonFxAdapter<JText>() {
-		
+    
 	shared actual JText createDelegate() {
 		value jtext = JText(location[0], location[1], text);
 		jtext.font = font.font;
@@ -35,11 +40,34 @@ shared class Text(
 		jtext.underline = underline;
 		jtext.strikethrough = strikethrough;
 		jtext.wrappingWidth = wrappingWidth else 0.0;
-		jtext.fontSmoothingType = fontSmoothingType;
-		jtext.boundsType = textBoundsType;
-		jtext.textAlignment = textAlignment;
+		jtext.fontSmoothingType = fontSmoothing.type;
+		jtext.boundsType = textBoundsType.type;
+		jtext.textAlignment = textAlignment.type;
 		jtext.textOrigin = textOrigin;
 		return jtext;	
 	}
 	
 }
+
+shared abstract class FontSmoothing(shared JFontSmoothingType type) 
+        of graySmoothing|lcdSmoothing {
+    string=>type.string;
+}
+shared object lcdSmoothing extends FontSmoothing(JFontSmoothingType.\iGRAY) {}
+shared object graySmoothing extends FontSmoothing(JFontSmoothingType.\iLCD) {}
+
+shared abstract class TextBounds(shared JTextBoundsType type)
+        of logicalBounds|visualBounds {
+    string=>type.string;
+}
+shared object logicalBounds extends TextBounds(JTextBoundsType.\iLOGICAL) {}
+shared object visualBounds extends TextBounds(JTextBoundsType.\iVISUAL) {}
+
+shared abstract class TextAlignment(shared JTextAlignment type)
+        of center|justify|left|right {
+    string=>type.string;
+}
+shared object center extends TextAlignment(JTextAlignment.\iCENTER) {}
+shared object justify extends TextAlignment(JTextAlignment.\iJUSTIFY) {}
+shared object left extends TextAlignment(JTextAlignment.\iLEFT) {}
+shared object right extends TextAlignment(JTextAlignment.\iRIGHT) {}
