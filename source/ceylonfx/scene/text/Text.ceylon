@@ -2,13 +2,14 @@ import ceylonfx.application {
     CeylonFxAdapter,
     asType
 }
+import ceylonfx.geometry {
+    VerticalPosition,
+    verticalBaseline
+}
 import ceylonfx.scene.paint {
     black
 }
 
-import javafx.geometry {
-    VPos
-}
 import javafx.scene.paint {
     Paint
 }
@@ -28,9 +29,9 @@ shared class Text(
 	Boolean strikethrough = false,
 	Float? wrappingWidth = null,
 	FontSmoothing fontSmoothing = graySmoothing,
-	TextBounds textBoundsType = logicalBounds,
+	TextBounds textBounds = logicalBounds,
 	TextAlignment textAlignment = left,
-	VPos textOrigin = VPos.\iBASELINE)
+	VerticalPosition textOrigin = verticalBaseline)
         extends CeylonFxAdapter<JText>() {
     
 	shared actual JText createDelegate() {
@@ -41,15 +42,15 @@ shared class Text(
 		jtext.strikethrough = strikethrough;
 		jtext.wrappingWidth = wrappingWidth else 0.0;
 		jtext.fontSmoothingType = fontSmoothing.type;
-		jtext.boundsType = textBoundsType.type;
+		jtext.boundsType = textBounds.type;
 		jtext.textAlignment = textAlignment.type;
-		jtext.textOrigin = textOrigin;
+		jtext.textOrigin = textOrigin.vpos;
 		return jtext;	
 	}
 	
 }
 
-shared abstract class FontSmoothing(shared JFontSmoothingType type) 
+shared abstract class FontSmoothing(shared JFontSmoothingType type)
         of graySmoothing|lcdSmoothing {
     string=>type.string;
 }
