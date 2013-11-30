@@ -25,7 +25,8 @@ shared void run() =>
     Stage {
         title = "CeylonFX Demo Application";
         Scene {
-            fill = black; dimension = [600.0, 150.0];
+            fill = black;
+            dimension = [600.0, 150.0];
             Text {
                 location= [50.0, 50.0];
                 text = "Welcome to CeylonFX";
