@@ -24,13 +24,17 @@ shared class Scene(
     {Node|CeylonNode*} children = [])
         extends CeylonFxAdapter<JScene>() {
     
-    Group root = Group();
-    root.children.setAll(*asNodes(children));
-    value jscene = JScene(root, dimension[0], dimension[1], depthBuffer);
-    jscene.fill = fill.delegate;
+    late JScene jscene;
+    
+    shared actual JScene createDelegate() {
+        Group root = Group();
+        root.children.setAll(*asNodes(children));
+        jscene = JScene(root, dimension[0], dimension[1], depthBuffer);
+        jscene.fill = fill.delegate;
+        return jscene;
+    }
     
     shared Cursor cursor => Cursor(jscene.cursor);
     assign cursor => jscene.cursor=cursor.cursor;
     
-    createDelegate() => jscene;
 }
