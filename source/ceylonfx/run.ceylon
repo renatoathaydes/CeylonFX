@@ -1,23 +1,26 @@
 import ceylonfx.application {
-	CeylonFX
+    CeylonFX
 }
 import ceylonfx.scene {
-	Scene
+    Scene
+}
+import ceylonfx.scene.paint {
+    LinearGradient,
+    black,
+    blue,
+    cyan,
+    white
+}
+import ceylonfx.scene.text {
+    Text
 }
 import ceylonfx.stage {
-	Stage
+    Stage
 }
 
-import javafx.scene.paint {
-	Color {
-		black = \iBLACK, cyan = \iCYAN, blue = \iBLUE, white = \iWHITE
-	}
+import javafx.scene.text {
+    Font
 }
-import ceylonfx.scene.paint{ LinearGradient } 
-import ceylonfx.scene.text {
-	Text
-}
-import javafx.scene.text { Font }
 
 
 "Run the module `ceylonfx`."

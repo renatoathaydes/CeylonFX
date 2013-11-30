@@ -10,10 +10,6 @@ import javafx.scene.paint {
 	JLinearGrad=LinearGradient,
 	JRadialGrad=RadialGradient,
 	JImagePattern=ImagePattern,
-	Color {
-		white=WHITE,
-		yellow=YELLOW
-	},
 	JPaint=Paint
 }
 import javafx.scene.image { Image }
@@ -22,7 +18,7 @@ shared abstract class Paint()
 		extends CeylonFxAdapter<JPaint>() {}
 
 {Stop*} jStops({[Float, Color]*} stops)
-		=> { for (elem in stops) Stop(elem[0], elem[1]) };
+		=> { for (elem in stops) Stop(elem[0], elem[1].createDelegate()) };
 
 shared class LinearGradient(
 	[Float,Float] start = [0.0, 0.0],
