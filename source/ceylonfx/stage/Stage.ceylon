@@ -31,7 +31,7 @@ shared class Stage(scene, stageStyle = decorated, title = "CeylonFX") {
 }
 
 JStageStyle forJava(StageStyle style) {
-	switch(style)
+	switch (style)
 	case (decorated) { return \iDECORATED; }
 	case (transparent) { return \iTRANSPARENT; }
 	case (undecorated) { return \iUNDECORATED; }
