@@ -17,10 +17,7 @@ import javafx.beans.property {
 	StringProperty
 }
 
-shared void binding(<[BooleanProperty, StringProperty]->String(Boolean)> bind) {
-	value bindable = bind.key[0];
-	value toUpdate = bind.key[1];
-	value updateFunction = bind.item;
+shared void binding(BooleanProperty bindable, StringProperty toUpdate, String(Boolean) updateFunction) {
 	object listener satisfies CeylonListener<Bool> {
 		shared actual void onChange(Bool? oldValue, Bool? newValue) {
 			toUpdate.setValue(updateFunction(fromJavaBool(newValue)));

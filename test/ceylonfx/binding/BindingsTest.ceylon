@@ -4,7 +4,7 @@ import ceylon.test { ... }
 
 shared test void bindTest() {
 	value cb = CheckBox();
-	binding([cb.selectedProperty, cb.textProperty] -> ((Boolean sel) => sel then "on" else "off"));
+	binding(cb.selectedProperty, cb.textProperty, (Boolean sel) => sel then "on" else "off");
 	cb.selected = true;
 	assertEquals(cb.text, "on");
 	
