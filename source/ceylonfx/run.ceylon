@@ -21,23 +21,24 @@ import ceylonfx.stage {
 
 shared void run() 
         => CeylonFX {
-    args = ["args", "for", "App"];
+    args = process.arguments;
     Stage {
         title = "CeylonFX Demo Application";
         Scene {
             fill = black;
             dimension = [600.0, 150.0];
             Text {
-                location= [50.0, 50.0];
+                location = [50.0, 50.0];
                 text = "Welcome to CeylonFX";
+                underline = true;
                 font = font("Arial", 48.0);
                 fill = LinearGradient { [0.0, blue], [0.75, cyan], [1.0, white] };
             },
             Text {
-                location=[50.0, 100.0];
-                text="Under construction...";
-                font=font("Arial", 12.0);
-                fill=white;
+                location = [50.0, 100.0];
+                text = "Under construction...";
+                font = font("Arial", 12.0);
+                fill = white;
             }
         };
     };
