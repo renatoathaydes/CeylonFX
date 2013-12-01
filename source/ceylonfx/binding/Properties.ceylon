@@ -24,69 +24,49 @@ shared interface FxMutable<in Prop> {
 
 shared class BooleanProperty(shared ObservableValue<JBool> delegate)
 		satisfies FxProperty<Boolean> {
-	shared actual Boolean get() => fromJavaBool(delegate.\ivalue);
-
-	shared actual void addListener(CeylonListener<Boolean> listener) {
+	get() => fromJavaBool(delegate.\ivalue);
+	addListener(CeylonListener<Boolean> listener) =>
 		delegate.addListener(convert(listener, booleanJ2C));
-	}
-	
 }
 
 shared class WritableBooleanProperty(JBooleanProp delegate)
 		satisfies FxMutable<Boolean> {
-	shared actual void set(Boolean prop) {
-		delegate.set(prop);
-	}	
+	set(Boolean prop) => delegate.set(prop);
 }
 
 shared class StringProperty(shared ObservableValue<JString> delegate)
 		satisfies FxProperty<String> {
-	shared actual String get() => delegate.\ivalue.string;
-
-	shared actual void addListener(CeylonListener<String> listener) {
+	get() => delegate.\ivalue.string;
+	addListener(CeylonListener<String> listener) =>
 		delegate.addListener(convert(listener, stringJ2C));
-	}
-	
 }
 
 shared class WritableStringProperty(JStringProp delegate)
 		extends StringProperty(delegate) satisfies FxMutable<String> {
-	shared actual void set(String prop) {
-		delegate.setValue(prop);
-	}
+	set(String prop) => delegate.setValue(prop);
 }
 
 shared class IntegerProperty(shared ObservableValue<JInt> delegate)
 		satisfies FxProperty<Integer> {
-	shared actual Integer get() => delegate.\ivalue.intValue();
-
-	shared actual void addListener(CeylonListener<Integer> listener) {
+	get() => delegate.\ivalue.intValue();
+	addListener(CeylonListener<Integer> listener) =>
 		delegate.addListener(convert(listener, integerJ2C));
-	}
-	
 }
 
 shared class WritableIntegerProperty(JIntegerProp delegate)
 		extends IntegerProperty(fromProperty(delegate)) satisfies FxMutable<Integer> {
-	shared actual void set(Integer prop) {
-		delegate.set(prop);
-	}
+	set(Integer prop) => delegate.set(prop);
 }
 
 shared class FloatProperty(shared ObservableValue<JFloat> delegate)
 		satisfies FxProperty<Float> {
-	shared actual Float get() => delegate.\ivalue.floatValue();
-
-	shared actual void addListener(CeylonListener<Float> listener) {
+	get() => delegate.\ivalue.floatValue();
+	addListener(CeylonListener<Float> listener) =>
 		delegate.addListener(convert(listener, floatJ2C));
-	}
-	
 }
 
 shared class WritableFloatProperty(JFloatProp delegate)
 		extends FloatProperty(fromProperty(delegate)) satisfies FxMutable<Float> {
-	shared actual void set(Float prop) {
-		delegate.set(prop);
-	}
+	set(Float prop) => delegate.set(prop);
 }
 
