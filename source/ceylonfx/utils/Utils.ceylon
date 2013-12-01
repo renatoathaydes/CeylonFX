@@ -36,6 +36,14 @@ shared object floatJ2C satisfies TypeConverter<JFloat, Float> {
 	shared actual Float convert(JFloat from) => from.floatValue();
 }
 
+shared TypeConverter<JavaType, CeylonType> asTypeConverter<JavaType, CeylonType>(
+		CeylonType transform(JavaType? from)) {
+	object converter satisfies TypeConverter<JavaType, CeylonType> { 
+		shared actual CeylonType convert(JavaType? from) => transform(from);
+	}
+	return converter;
+}
+
 shared Value? doInFxThread<Value>(Value toRun(Object* args)) {
 	variable Value? result = null;
 	CountDownLatch latch = CountDownLatch(1);

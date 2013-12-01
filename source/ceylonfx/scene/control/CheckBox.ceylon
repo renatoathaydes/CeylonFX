@@ -3,18 +3,17 @@ import ceylonfx.application {
 }
 import ceylonfx.binding {
 	BooleanProperty,
-	WritableStringProperty
-}
-
-import javafx.beans.property {
+	WritableStringProperty,
 	ObjectProperty
 }
+import ceylonfx.scene.paint { Paint }
 import javafx.scene.control {
 	JCheckBox=CheckBox
 }
 import javafx.scene.paint {
-	Paint
+	JPaint=Paint
 }
+import ceylonfx.scene.paint.utils { toCeylonPaint }
 
 shared class CheckBox(
 	String initialText = "",
@@ -34,9 +33,9 @@ shared class CheckBox(
 	}
 	
 	shared BooleanProperty selectedProperty => BooleanProperty(delegate.selectedProperty());
-	
-	//TODO implement CeylonFx ObjectProperty and replace this
-	shared ObjectProperty<Paint> textFillProperty => delegate.textFillProperty();
+
+	shared ObjectProperty<Paint, JPaint> textFillProperty =>
+			ObjectProperty<Paint, JPaint>(delegate.textFillProperty(), toCeylonPaint);
 	
 	shared WritableStringProperty textProperty => WritableStringProperty(delegate.textProperty());
 	

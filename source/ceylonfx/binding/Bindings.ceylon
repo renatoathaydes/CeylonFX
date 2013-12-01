@@ -18,4 +18,3 @@ shared void binding<From, To>(
 	}
 	bindable.addListener(listener);
 }
-

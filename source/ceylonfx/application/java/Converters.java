@@ -4,6 +4,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -86,6 +87,10 @@ public class Converters {
 				property.removeListener((ChangeListener<? super Number>) listener);
 			}
 		};
+	}
+
+	public static <T> T valueOf(ObjectProperty<T> property) {
+		return property.get();
 	}
 
 }
