@@ -9,6 +9,5 @@ shared test void bindTest() {
 	assertEquals(cb.text, "on");
 	
 	cb.selected = false;
-	assertEquals(cb.text, "off");
-	
+	assertEquals(cb.text, "off");	
 }

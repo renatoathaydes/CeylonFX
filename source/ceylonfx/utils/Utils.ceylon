@@ -1,6 +1,15 @@
 import java.lang { Runnable, Bool=Boolean }
 import javafx.application { Platform }
 import java.util.concurrent { CountDownLatch }
+import ceylonfx.application.java { TypeConverter }
+
+shared object booleanC2J satisfies TypeConverter<Boolean, Bool> {
+	shared actual Bool convert(Boolean from) => from then Bool.\iTRUE else Bool.\iFALSE;
+}
+
+shared object booleanJ2C satisfies TypeConverter<Bool, Boolean> {
+	shared actual Boolean convert(Bool from) => from === Bool.\iTRUE then true else false;
+}
 
 shared Value? doInFxThread<Value>(Value toRun(Object* args)) {
 	variable Value? result = null;

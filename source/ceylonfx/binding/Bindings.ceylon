@@ -1,27 +1,21 @@
 import ceylonfx.application.java {
-	CeylonListener,
-	ListenerBridge {
-		convert
-	}
-}
-import ceylonfx.utils {
-	fromJavaBool
+	CeylonListener
 }
 
-import java.lang {
-	Bool=Boolean
-}
+shared class MutableProperty<in Prop>(shared void setValue(Prop prop)) {}
 
-import javafx.beans.property {
-	BooleanProperty,
-	StringProperty
-}
-
-shared void binding(BooleanProperty bindable, StringProperty toUpdate, String(Boolean) updateFunction) {
-	object listener satisfies CeylonListener<Bool> {
-		shared actual void onChange(Bool? oldValue, Bool? newValue) {
-			toUpdate.setValue(updateFunction(fromJavaBool(newValue)));
+shared void binding<From, To>(
+	FxProperty<From> bindable,
+	FxMutable<To> toUpdate,
+	To(From) transform) {
+	
+	object listener satisfies CeylonListener<From> {
+		shared actual void onChange(From? oldValue, From? newValue) {
+			if (exists newValue) {
+				toUpdate.set(transform(newValue));	
+			}
 		}
 	}
-	bindable.addListener(convert(listener));
+	bindable.addListener(listener);
 }
+

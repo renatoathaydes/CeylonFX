@@ -5,11 +5,11 @@ import javafx.beans.value.ObservableValue;
 
 public class ListenerBridge {
 
-	public static <T> ChangeListener<T> convert(final CeylonListener<T> listener) {
-		return new ChangeListener<T>() {
+	public static <J, C> ChangeListener<J> convert(final CeylonListener<C> listener, final TypeConverter<J, C> typeConverter) {
+		return new ChangeListener<J>() {
 			@Override
-			public void changed(ObservableValue<? extends T> obs, T oldValue, T newValue) {
-				listener.onChange(oldValue, newValue);
+			public void changed(ObservableValue<? extends J> obs, J oldValue, J newValue) {
+				listener.onChange(typeConverter.convert(oldValue), typeConverter.convert(newValue));
 			}
 		};
 	}

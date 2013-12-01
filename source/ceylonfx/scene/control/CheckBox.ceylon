@@ -1,7 +1,20 @@
-import javafx.scene.control{ JCheckBox=CheckBox }
-import ceylonfx.application { CeylonFxAdapter }
-import javafx.beans.property { BooleanProperty, ObjectProperty, StringProperty }
-import javafx.scene.paint { Paint }
+import ceylonfx.application {
+	CeylonFxAdapter
+}
+import ceylonfx.binding {
+	BooleanProperty,
+	WritableStringProperty
+}
+
+import javafx.beans.property {
+	ObjectProperty
+}
+import javafx.scene.control {
+	JCheckBox=CheckBox
+}
+import javafx.scene.paint {
+	Paint
+}
 
 shared class CheckBox(
 	String initialText = "",
@@ -20,11 +33,20 @@ shared class CheckBox(
 		delegate.selected = selected;
 	}
 	
-	shared BooleanProperty selectedProperty => delegate.selectedProperty();
+	shared BooleanProperty selectedProperty => BooleanProperty(delegate.selectedProperty());
 	
+	//TODO implement CeylonFx ObjectProperty and replace this
 	shared ObjectProperty<Paint> textFillProperty => delegate.textFillProperty();
 	
-	shared StringProperty textProperty => delegate.textProperty();
+	shared WritableStringProperty textProperty => WritableStringProperty(delegate.textProperty());
 	
 	shared String text => delegate.text;
+	
+	assign text {
+		delegate.text = text;
+	}
+	
+	shared void updateText(String newText) {
+		delegate.text = newText;
+	}
 }
