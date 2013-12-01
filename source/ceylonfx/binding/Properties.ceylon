@@ -6,7 +6,7 @@ import javafx.beans.property {
 	JIntegerProp=IntegerProperty,
 	JFloatProp=FloatProperty
 }
-import ceylonfx.utils { fromJavaBool, booleanJ2C }
+import ceylonfx.utils { fromJavaBool, booleanJ2C, stringJ2C, integerJ2C, floatJ2C }
 import ceylonfx.application.java { CeylonListener, Converters { fromProperty }, ListenerBridge {
 		convert
 	}
@@ -43,7 +43,9 @@ shared class StringProperty(shared ObservableValue<JString> delegate)
 		satisfies FxProperty<String> {
 	shared actual String get() => delegate.\ivalue.string;
 
-	shared actual void addListener(CeylonListener<String> listenr) {}
+	shared actual void addListener(CeylonListener<String> listener) {
+		delegate.addListener(convert(listener, stringJ2C));
+	}
 	
 }
 
@@ -58,7 +60,9 @@ shared class IntegerProperty(shared ObservableValue<JInt> delegate)
 		satisfies FxProperty<Integer> {
 	shared actual Integer get() => delegate.\ivalue.intValue();
 
-	shared actual void addListener(CeylonListener<Integer> listenr) {}
+	shared actual void addListener(CeylonListener<Integer> listener) {
+		delegate.addListener(convert(listener, integerJ2C));
+	}
 	
 }
 
@@ -73,7 +77,9 @@ shared class FloatProperty(shared ObservableValue<JFloat> delegate)
 		satisfies FxProperty<Float> {
 	shared actual Float get() => delegate.\ivalue.floatValue();
 
-	shared actual void addListener(CeylonListener<Float> listenr) {}
+	shared actual void addListener(CeylonListener<Float> listener) {
+		delegate.addListener(convert(listener, floatJ2C));
+	}
 	
 }
 
