@@ -8,20 +8,30 @@ Here's a quick example of what code written with CeylonFX looks like *(this exam
 
 ```ceylon
 CeylonFX {
-	args = ["args", "for", "App"];
+	args = process.arguments;
 	Stage {
 		title = "CeylonFX Demo Application";
 		Scene {
-			fill = black; dimension = [600.0, 150.0];
-			Text {
-				location= [50.0, 50.0];
-				text = "Welcome to CeylonFX";
-				font = Font("Arial", 48.0);
-				fill = LinearGradient { [0.0, blue], [0.75, cyan], [1.0, white] };
-			},
-			Text([50.0, 100.0], "Under construction...", Font("Arial", 12.0), white)
+			fill = black;
+			dimension = [600.0, 150.0];
+			VBox {
+				spacing = 20;
+				insets = Insets { top = 15.0; };
+				minimumSize = [600.0, 0.0];
+				alignment = center;
+				Text {
+					text = "Welcome to CeylonFX";
+					underline = true;
+					font = font("Arial", 48.0);
+					fill = LinearGradient { [0.0, blue], [0.75, cyan], [1.0, white] };
+				},
+				Text {
+					text = "Under construction...";
+					font = font("Arial", 12.0);
+					fill = white;
+				}   
+			}
 		};
-		
 	};
 };
 ```
