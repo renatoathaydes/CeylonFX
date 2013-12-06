@@ -1,11 +1,13 @@
 import ceylonfx.application {
 	CeylonFxAdapter,
-	CeylonNode
+	CeylonNode,
+	asNodes
 }
 import ceylonfx.geometry {
 	Position,
 	topLeft,
-	Insets
+	Insets,
+	Dimension
 }
 
 import javafx.scene {
@@ -19,30 +21,37 @@ import javafx.scene.layout {
 shared class VBox(
 	Integer spacing = 0,
 	Position alignment = topLeft,
-	Insets insets = Insets(),
-	{Node|CeylonNode|[CeylonNode, Priority]*} children = [])
+	Insets? insets = null,
+	Dimension? minimumSize = null,
+	Dimension? preferredSize = null,
+	Dimension? maximumSize = null,
+	{Node|CeylonNode|NodeWithConstraint*} children = [])
 		extends CeylonFxAdapter<JVBox>() {
 	
 	shared actual JVBox createDelegate() {
 		value jvbox = JVBox();
 		jvbox.spacing = spacing.float;
 		jvbox.alignment = alignment.pos;
+		if (exists minimumSize) { jvbox.setMinSize(*minimumSize); }
+		if (exists preferredSize) { jvbox.setPrefSize(*preferredSize); }
+		if (exists maximumSize) { jvbox.setMaxSize(*maximumSize); }
 		jvbox.children.setAll(*transform(children));
+		if (exists insets, !children.empty) {
+			jvbox.setMargin(jvbox.children.get(0), insets.delegate);
+		}
 		return jvbox;
 	}
 	
-	{Node*} transform({<Node|CeylonNode|[CeylonNode, Priority]>*} children) {
-		variable {Node*} result = {};
-		for(child in children) {
+	{Node*} transform({Node|CeylonNode|NodeWithConstraint*} children) {
+		Node|CeylonNode process(Node|CeylonNode|NodeWithConstraint child) {
 			switch (child)
-			case (is Node) { result = result.chain([child]); }
-			case (is CeylonNode) { result = result.chain([child.delegate]); }
-			case (is [CeylonNode, Priority]) {
-				JVBox.setVgrow( child.first.delegate, child[1].priority );
-				result = result.chain([child.first.delegate]);
-			} //else { throw;}
+			case (is Node|CeylonNode) { return child; }
+			case (is NodeWithConstraint) {
+				JVBox.setVgrow( child.node.delegate, child.priority.delegate );
+				return child.node.delegate;
+			}
 		}
-		return result;
+		return asNodes(children.map(process));
 	}
 	
 }
