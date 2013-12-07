@@ -25,7 +25,7 @@ shared class VBox(
 	Dimension? minimumSize = null,
 	Dimension? preferredSize = null,
 	Dimension? maximumSize = null,
-	{Node|CeylonNode|NodeWithConstraint*} children = [])
+	{Node|CeylonNode|VGrowNode*} children = [])
 		extends CeylonFxAdapter<JVBox>() {
 	
 	shared actual JVBox createDelegate() {
@@ -42,12 +42,12 @@ shared class VBox(
 		return jvbox;
 	}
 	
-	{Node*} transform({Node|CeylonNode|NodeWithConstraint*} children) {
-		Node|CeylonNode process(Node|CeylonNode|NodeWithConstraint child) {
+	{Node*} transform({Node|CeylonNode|VGrowNode*} children) {
+		Node|CeylonNode process(Node|CeylonNode|VGrowNode child) {
 			switch (child)
 			case (is Node|CeylonNode) { return child; }
-			case (is NodeWithConstraint) {
-				JVBox.setVgrow( child.node.delegate, child.priority.delegate );
+			case (is VGrowNode) {
+				JVBox.setVgrow( child.node.delegate, child.vgrow.delegate );
 				return child.node.delegate;
 			}
 		}
@@ -55,3 +55,6 @@ shared class VBox(
 	}
 	
 }
+
+"A Node which can be added to the children of a [[VBox]] with a vgrow constraint."
+shared class VGrowNode(shared CeylonNode node, shared Priority vgrow) {}
