@@ -1,44 +1,55 @@
-import ceylonfx.application {
-    CeylonFxAdapter,
-    asType
-}
 import ceylonfx.geometry {
-    VerticalPosition,
-    verticalBaseline,
-    Location
+	VerticalPosition,
+	verticalBaseline,
+	Location
 }
 import ceylonfx.scene.paint {
-    black
+	Paint,
+	black
+}
+import ceylonfx.scene.shape {
+	Shape,
+	squareLineCap,
+	miterLineJoin,
+	StrokeType,
+	StrokeLineCap,
+	StrokeLineJoin,
+	centeredStroke
 }
 
-import javafx.scene.paint {
-    Paint
-}
 import javafx.scene.text {
-    JText=Text,
-    JFontSmoothingType=FontSmoothingType,
-    JTextBoundsType=TextBoundsType,
-    JTextAlignment=TextAlignment
+	JText=Text,
+	JFontSmoothingType=FontSmoothingType,
+	JTextBoundsType=TextBoundsType,
+	JTextAlignment=TextAlignment
 }
 
 shared class Text(
-    String text,
-	Font font = package.font("Arial", 18.0), 
-	Location location = [0.0, 0.0], 
-	Paint|CeylonFxAdapter<Paint> fill = black,
-	Boolean underline = false,
-	Boolean strikethrough = false,
-	Float? wrappingWidth = null,
-	FontSmoothing fontSmoothing = graySmoothing,
-	TextBounds textBounds = logicalBounds,
-	TextAlignment textAlignment = left,
-	VerticalPosition textOrigin = verticalBaseline)
-        extends CeylonFxAdapter<JText>() {
+    shared String text,
+	shared Font font = package.font("Arial", 18.0), 
+	shared Location location = [0.0, 0.0], 
+	shared Boolean underline = false,
+	shared Boolean strikethrough = false,
+	shared Float? wrappingWidth = null,
+	shared FontSmoothing fontSmoothing = graySmoothing,
+	shared TextBounds textBounds = logicalBounds,
+	shared TextAlignment textAlignment = left,
+	shared VerticalPosition textOrigin = verticalBaseline,
+	Paint fill = black,
+	Boolean smooth = true,
+	Float strokeDashOffset = 0.0,
+	StrokeLineCap strokeLineCap = squareLineCap,
+	StrokeLineJoin strokeLineJoin = miterLineJoin,
+	Float strokeMiterLimit = 10.0,
+	Paint? stroke = null,
+	StrokeType strokeType = centeredStroke,
+	Float strokeWidth = 1.0)
+        extends Shape(fill, smooth, strokeDashOffset, strokeLineCap, strokeLineJoin,
+			strokeMiterLimit, stroke, strokeType, strokeWidth) {
     
 	shared actual JText createDelegate() {
 		value jtext = JText(location[0], location[1], text);
 		jtext.font = font.font;
-		jtext.fill = asType<Paint>(fill);
 		jtext.underline = underline;
 		jtext.strikethrough = strikethrough;
 		jtext.wrappingWidth = wrappingWidth else 0.0;
@@ -46,6 +57,7 @@ shared class Text(
 		jtext.boundsType = textBounds.type;
 		jtext.textAlignment = textAlignment.type;
 		jtext.textOrigin = textOrigin.vpos;
+		transferPropertiesTo(jtext);
 		return jtext;	
 	}
 	
