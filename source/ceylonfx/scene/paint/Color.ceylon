@@ -1,750 +1,459 @@
 import javafx.scene.paint {
-	JColor=Color { ... }
-}
+	JColor=Color {
+		...
+	}
+} 
 
-shared abstract class Color() 
-        extends Paint() {
-	shared actual formal JColor createDelegate();
+shared class Color(JColor jColor) 
+		extends Paint() {
+	shared actual JColor createDelegate() => jColor;
 }
 
 shared Color grayShade(Float gray, Float opacity = 1.0) 
-        => colorFor(JColor.gray(gray, opacity));
+		=> Color(JColor.gray(gray, opacity));
 
 shared Color rgb(Integer red, Integer green, Integer blue, Float opacity = 1.0) 
-        => colorFor(JColor.rgb(red, green, blue, opacity));
+		=> Color(JColor.rgb(red, green, blue, opacity));
 
 shared Color web(String colorString, Float opacity = 1.0) 
-        => colorFor(JColor.web(colorString, opacity));
-
-Color colorFor(JColor jColor) {
-	object result extends Color() {
-		createDelegate() => jColor;
-	}
-	return result;
-}
+		=> Color(JColor.web(colorString, opacity));
 
 "A fully transparent color with an ARGB value of #00000000."
-shared object transparent extends Color() {
-	createDelegate() => \iTRANSPARENT;
-}
+shared Color transparent = Color(\iTRANSPARENT);
 
 "The color alice blue with an RGB value of #F0F8FF."
-shared object aliceBlue extends Color() {
-	createDelegate() => \iALICEBLUE;
-}
+shared Color aliceBlue = Color(\iALICEBLUE);
 
 "The color antique white with an RGB value of #FAEBD7."
-shared object antiqueWhite extends Color() {
-	createDelegate() => \iANTIQUEWHITE;
-}
+shared Color antiqueWhite = Color(\iANTIQUEWHITE);
 
 "The color aqua with an RGB value of #00FFFF."
-shared object aqua extends Color() {
-	createDelegate() => \iAQUA;
-}
+shared Color aqua = Color(\iAQUA);
 
 "The color aquamarine with an RGB value of #7FFFD4."
-shared object aquaMarine extends Color() {
-	createDelegate() => \iAQUAMARINE;
-}
+shared Color aquaMarine = Color(\iAQUAMARINE);
 
 "The color azure with an RGB value of #F0FFFF."
-shared object azure extends Color() {
-	createDelegate() => \iAZURE;
-}
+shared Color azure = Color(\iAZURE);
 
 "The color beige with an RGB value of #F5F5DC."
-shared object beige extends Color() {
-	createDelegate() => \iBEIGE;
-}
+shared Color beige = Color(\iBEIGE);
 
 "The color bisque with an RGB value of #FFE4C4."
-shared object bisque extends Color() {
-	createDelegate() => \iBISQUE;
-}
+shared Color bisque = Color(\iBISQUE);
 
 "The color black with an RGB value of #000000."
-shared object black extends Color() {
-	createDelegate() => \iBLACK;
-}
+shared Color black = Color(\iBLACK);
 
 "The color blanched almond with an RGB value of #FFEBCD."
-shared object blanchedAlmond extends Color() {
-	createDelegate() => \iBLANCHEDALMOND;
-}
+shared Color blanchedAlmond = Color(\iBLANCHEDALMOND);
 
 "The color blue with an RGB value of #0000FF."
-shared object blue extends Color() {
-	createDelegate() => \iBLUE;
-}
+shared Color blue = Color(\iBLUE);
 
 "The color blue violet with an RGB value of #8A2BE2."
-shared object blueViolet extends Color() {
-	createDelegate() => \iBLUEVIOLET;
-}
+shared Color blueViolet = Color(\iBLUEVIOLET);
 
 "The color brown with an RGB value of #A52A2A."
-shared object brown extends Color() {
-	createDelegate() => \iBROWN;
-}
+shared Color brown = Color(\iBROWN);
 
 "The color burly wood with an RGB value of #DEB887."
-shared object burlyWood extends Color() {
-	createDelegate() => \iBURLYWOOD;
-}
+shared Color burlyWood = Color(\iBURLYWOOD);
 
 "The color cadet blue with an RGB value of #5F9EA0."
-shared object cadetBlue extends Color() {
-	createDelegate() => \iCADETBLUE;
-}
+shared Color cadetBlue = Color(\iCADETBLUE);
 
 "The color chartreuse with an RGB value of #7FFF00."
-shared object chartReuse extends Color() {
-	createDelegate() => \iCHARTREUSE;
-}
+shared Color chartReuse = Color(\iCHARTREUSE);
 
 "The color chocolate with an RGB value of #D2691E."
-shared object chocolate extends Color() {
-	createDelegate() => \iCHOCOLATE;
-}
+shared Color chocolate = Color(\iCHOCOLATE);
 
 "The color coral with an RGB value of #FF7F50."
-shared object coral extends Color() {
-	createDelegate() => \iCORAL;
-}
+shared Color coral = Color(\iCORAL);
 
 "The color cornflower blue with an RGB value of #6495ED."
-shared object cornFlowerBlue extends Color() {
-	createDelegate() => \iCORNFLOWERBLUE;
-}
+shared Color cornFlowerBlue = Color(\iCORNFLOWERBLUE);
 
 "The color cornsilk with an RGB value of #FFF8DC."
-shared object cornSilk extends Color() {
-	createDelegate() => \iCORNSILK;
-}
+shared Color cornSilk = Color(\iCORNSILK);
 
 "The color crimson with an RGB value of #DC143C."
-shared object crimson extends Color() {
-	createDelegate() => \iCRIMSON;
-}
+shared Color crimson = Color(\iCRIMSON);
 
 "The color cyan with an RGB value of #00FFFF."
-shared object cyan extends Color() {
-	createDelegate() => \iCYAN;
-}
+shared Color cyan = Color(\iCYAN);
 
 "The color dark blue with an RGB value of #00008B."
-shared object darkBlue extends Color() {
-	createDelegate() => \iDARKBLUE;
-}
+shared Color darkBlue = Color(\iDARKBLUE);
 
 "The color dark cyan with an RGB value of #008B8B."
-shared object darkCyan extends Color() {
-	createDelegate() => \iDARKCYAN;
-}
+shared Color darkCyan = Color(\iDARKCYAN);
 
 "The color dark goldenrod with an RGB value of #B8860B."
-shared object darkGoldenrod extends Color() {
-	createDelegate() => \iDARKGOLDENROD;
-}
+shared Color darkGoldenrod = Color(\iDARKGOLDENROD);
 
 "The color dark gray with an RGB value of #A9A9A9."
-shared object darkGray extends Color() {
-	createDelegate() => \iDARKGRAY;
-}
+shared Color darkGray = Color(\iDARKGRAY);
 
 "The color dark green with an RGB value of #006400."
-shared object darkGreen extends Color() {
-	createDelegate() => \iDARKGREEN;
-}
+shared Color darkGreen = Color(\iDARKGREEN);
 
 "The color dark grey with an RGB value of #A9A9A9."
 shared Color darkGrey = darkGray;
 
 "The color dark khaki with an RGB value of #BDB76B."
-shared object darkKhaki extends Color() {
-	createDelegate() => \iDARKKHAKI;
-}
+shared Color darkKhaki = Color(\iDARKKHAKI);
 
 "The color dark magenta with an RGB value of #8B008B."
-shared object darkMagenta extends Color() {
-	createDelegate() => \iDARKMAGENTA;
-}
+shared Color darkMagenta = Color(\iDARKMAGENTA);
 
 "The color dark olive green with an RGB value of #556B2F."
-shared object darkOliveGreen extends Color() {
-	createDelegate() => \iDARKOLIVEGREEN;
-}
+shared Color darkOliveGreen = Color(\iDARKOLIVEGREEN);
 
 "The color dark orange with an RGB value of #FF8C00."
-shared object darkOrange extends Color() {
-	createDelegate() => \iDARKORANGE;
-}
+shared Color darkOrange = Color(\iDARKORANGE);
 
 "The color dark orchid with an RGB value of #9932CC."
-shared object darkOrchid extends Color() {
-	createDelegate() => \iDARKORCHID;
-}
+shared Color darkOrchid = Color(\iDARKORCHID);
 
 "The color dark red with an RGB value of #8B0000."
-shared object darkRed extends Color() {
-	createDelegate() => \iDARKRED;
-}
+shared Color darkRed = Color(\iDARKRED);
 
 "The color dark salmon with an RGB value of #E9967A."
-shared object darkSalmon extends Color() {
-	createDelegate() => \iDARKSALMON;
-}
+shared Color darkSalmon = Color(\iDARKSALMON);
 
 "The color dark sea green with an RGB value of #8FBC8F."
-shared object darkSeaGreen extends Color() {
-	createDelegate() => \iDARKSEAGREEN;
-}
+shared Color darkSeaGreen = Color(\iDARKSEAGREEN);
 
 "The color dark slate blue with an RGB value of #483D8B."
-shared object darkSlateBlue extends Color() {
-	createDelegate() => \iDARKSLATEBLUE;
-}
+shared Color darkSlateBlue = Color(\iDARKSLATEBLUE);
 
 "The color dark slate gray with an RGB value of #2F4F4F."
-shared object darkSlateGray extends Color() {
-	createDelegate() => \iDARKSLATEGRAY;
-}
+shared Color darkSlateGray = Color(\iDARKSLATEGRAY);
 
 "The color dark slate grey with an RGB value of #2F4F4F."
 shared Color darkSlateGrey = darkSlateGray;
-
 "The color dark turquoise with an RGB value of #00CED1."
-shared object darkTurquoise extends Color() {
-	createDelegate() => \iDARKTURQUOISE;
-}
+shared Color darkTurquoise = Color(\iDARKTURQUOISE);
 
 "The color dark violet with an RGB value of #9400D3."
-shared object darkViolet extends Color() {
-	createDelegate() => \iDARKVIOLET;
-}
+shared Color darkViolet = Color(\iDARKVIOLET);
 
 "The color deep pink with an RGB value of #FF1493."
-shared object deepPink extends Color() {
-	createDelegate() => \iDEEPPINK;
-}
+shared Color deepPink = Color(\iDEEPPINK);
 
 "The color deep sky blue with an RGB value of #00BFFF."
-shared object deepSkyBlue extends Color() {
-	createDelegate() => \iDEEPSKYBLUE;
-}
+shared Color deepSkyBlue = Color(\iDEEPSKYBLUE);
 
 "The color dim gray with an RGB value of #696969."
-shared object dimGray extends Color() {
-	createDelegate() => \iDIMGRAY;
-}
+shared Color dimGray = Color(\iDIMGRAY);
 
 "The color dim grey with an RGB value of #696969."
 shared Color dimGrey = dimGray;
-
 "The color dodger blue with an RGB value of #1E90FF."
-shared object dodgerBlue extends Color() {
-	createDelegate() => \iDODGERBLUE;
-}
+shared Color dodgerBlue = Color(\iDODGERBLUE);
 
 "The color firebrick with an RGB value of #B22222."
-shared object fireBrick extends Color() {
-	createDelegate() => \iFIREBRICK;
-}
+shared Color fireBrick = Color(\iFIREBRICK);
 
 "The color floral white with an RGB value of #FFFAF0."
-shared object floralWhite extends Color() {
-	createDelegate() => \iFLORALWHITE;
-}
+shared Color floralWhite = Color(\iFLORALWHITE);
 
 "The color forest green with an RGB value of #228B22."
-shared object forestGreen extends Color() {
-	createDelegate() => \iFORESTGREEN;
-}
+shared Color forestGreen = Color(\iFORESTGREEN);
 
 "The color fuchsia with an RGB value of #FF00FF."
-shared object fuchsia extends Color() {
-	createDelegate() => \iFUCHSIA;
-}
+shared Color fuchsia = Color(\iFUCHSIA);
 
 "The color gainsboro with an RGB value of #DCDCDC."
-shared object gainsboro extends Color() {
-	createDelegate() => \iGAINSBORO;
-}
+shared Color gainsboro = Color(\iGAINSBORO);
 
 "The color ghost white with an RGB value of #F8F8FF."
-shared object ghostWhite extends Color() {
-	createDelegate() => \iGHOSTWHITE;
-}
+shared Color ghostWhite = Color(\iGHOSTWHITE);
 
 "The color gold with an RGB value of #FFD700."
-shared object gold extends Color() {
-	createDelegate() => \iGOLD;
-}
+shared Color gold = Color(\iGOLD);
 
 "The color goldenrod with an RGB value of #DAA520."
-shared object goldenRod extends Color() {
-	createDelegate() => \iGOLDENROD;
-}
+shared Color goldenRod = Color(\iGOLDENROD);
 
 "The color gray with an RGB value of #808080."
-shared object gray extends Color() {
-	createDelegate() => \iGRAY;
-}
+shared Color gray = Color(\iGRAY);
 
 "The color green with an RGB value of #008000."
-shared object green extends Color() {
-	createDelegate() => \iGREEN;
-}
+shared Color green = Color(\iGREEN);
 
 "The color green yellow with an RGB value of #ADFF2F."
-shared object greenYellow extends Color() {
-	createDelegate() => \iGREENYELLOW;
-}
+shared Color greenYellow = Color(\iGREENYELLOW);
 
 "The color grey with an RGB value of #808080."
 shared Color grey = gray;
 
 "The color honeydew with an RGB value of #F0FFF0."
-shared object honeyDew extends Color() {
-	createDelegate() => \iHONEYDEW;
-}
+shared Color honeyDew = Color(\iHONEYDEW);
 
 "The color hot pink with an RGB value of #FF69B4."
-shared object hotPink extends Color() {
-	createDelegate() => \iHOTPINK;
-}
+shared Color hotPink = Color(\iHOTPINK);
 
 "The color indian red with an RGB value of #CD5C5C."
-shared object indianRed extends Color() {
-	createDelegate() => \iINDIANRED;
-}
+shared Color indianRed = Color(\iINDIANRED);
 
 "The color indigo with an RGB value of #4B0082."
-shared object indigo extends Color() {
-	createDelegate() => \iINDIGO;
-}
+shared Color indigo = Color(\iINDIGO);
 
 "The color ivory with an RGB value of #FFFFF0."
-shared object ivory extends Color() {
-	createDelegate() => \iIVORY;
-}
+shared Color ivory = Color(\iIVORY);
 
 "The color khaki with an RGB value of #F0E68C."
-shared object khaki extends Color() {
-	createDelegate() => \iKHAKI;
-}
+shared Color khaki = Color(\iKHAKI);
 
 "The color lavender with an RGB value of #E6E6FA."
-shared object lavender extends Color() {
-	createDelegate() => \iLAVENDER;
-}
+shared Color lavender = Color(\iLAVENDER);
 
 "The color lavender blush with an RGB value of #FFF0F5."
-shared object lavenderBlush extends Color() {
-	createDelegate() => \iLAVENDERBLUSH;
-}
+shared Color lavenderBlush = Color(\iLAVENDERBLUSH);
 
 "The color lawn green with an RGB value of #7CFC00."
-shared object lawnGreen extends Color() {
-	createDelegate() => \iLAWNGREEN;
-}
+shared Color lawnGreen = Color(\iLAWNGREEN);
 
 "The color lemon chiffon with an RGB value of #FFFACD."
-shared object lemonChiffon extends Color() {
-	createDelegate() => \iLEMONCHIFFON;
-}
+shared Color lemonChiffon = Color(\iLEMONCHIFFON);
 
 "The color light blue with an RGB value of #ADD8E6."
-shared object lightBlue extends Color() {
-	createDelegate() => \iLIGHTBLUE;
-}
+shared Color lightBlue = Color(\iLIGHTBLUE);
 
 "The color light coral with an RGB value of #F08080."
-shared object lightCoral extends Color() {
-	createDelegate() => \iLIGHTCORAL;
-}
+shared Color lightCoral = Color(\iLIGHTCORAL);
 
 "The color light cyan with an RGB value of #E0FFFF."
-shared object lightCyan extends Color() {
-	createDelegate() => \iLIGHTCYAN;
-}
+shared Color lightCyan = Color(\iLIGHTCYAN);
 
 "The color light goldenrod yellow with an RGB value of #FAFAD2."
-shared object lightGoldenRod extends Color() {
-	createDelegate() => \iLIGHTGOLDENRODYELLOW;
-}
+shared Color lightGoldenRod = Color(\iLIGHTGOLDENRODYELLOW);
 
 "The color light gray with an RGB value of #D3D3D3."
-shared object lightGray extends Color() {
-	createDelegate() => \iLIGHTGRAY;
-}
+shared Color lightGray = Color(\iLIGHTGRAY);
 
 "The color light green with an RGB value of #90EE90."
-shared object lightGreen extends Color() {
-	createDelegate() => \iLIGHTGREEN;
-}
+shared Color lightGreen = Color(\iLIGHTGREEN);
 
 "The color light grey with an RGB value of #D3D3D3."
 shared Color lightGrey = lightGray;
-
 "The color light pink with an RGB value of #FFB6C1."
-shared object lightPink extends Color() {
-	createDelegate() => \iLIGHTPINK;
-}
+shared Color lightPink = Color(\iLIGHTPINK);
 
 "The color light salmon with an RGB value of #FFA07A."
-shared object lightSalmon extends Color() {
-	createDelegate() => \iLIGHTSALMON;
-}
+shared Color lightSalmon = Color(\iLIGHTSALMON);
 
 "The color light sea green with an RGB value of #20B2AA."
-shared object lightSeaGreen extends Color() {
-	createDelegate() => \iLIGHTSEAGREEN;
-}
+shared Color lightSeaGreen = Color(\iLIGHTSEAGREEN);
 
 "The color light sky blue with an RGB value of #87CEFA."
-shared object lightSkyBlue extends Color() {
-	createDelegate() => \iLIGHTSKYBLUE;
-}
+shared Color lightSkyBlue = Color(\iLIGHTSKYBLUE);
 
 "The color light slate gray with an RGB value of #778899."
-shared object lightSlateGray extends Color() {
-	createDelegate() => \iLIGHTSLATEGRAY;
-}
+shared Color lightSlateGray = Color(\iLIGHTSLATEGRAY);
 
 "The color light slate grey with an RGB value of #778899."
 shared Color lightSlateGrey = lightSlateGray;
-
 "The color light steel blue with an RGB value of #B0C4DE."
-shared object lightSteelBlue extends Color() {
-	createDelegate() => \iLIGHTSTEELBLUE;
-}
+shared Color lightSteelBlue = Color(\iLIGHTSTEELBLUE);
 
 "The color light yellow with an RGB value of #FFFFE0."
-shared object lightYellow extends Color() {
-	createDelegate() => \iLIGHTYELLOW;
-}
+shared Color lightYellow = Color(\iLIGHTYELLOW);
 
 "The color lime with an RGB value of #00FF00."
-shared object lime extends Color() {
-	createDelegate() => \iLIME;
-}
+shared Color lime = Color(\iLIME);
 
 "The color lime green with an RGB value of #32CD32."
-shared object limeGreen extends Color() {
-	createDelegate() => \iLIMEGREEN;
-}
+shared Color limeGreen = Color(\iLIMEGREEN);
 
 "The color linen with an RGB value of #FAF0E6."
-shared object linen extends Color() {
-	createDelegate() => \iLINEN;
-}
+shared Color linen = Color(\iLINEN);
 
 "The color magenta with an RGB value of #FF00FF."
-shared object magenta extends Color() {
-	createDelegate() => \iMAGENTA;
-}
+shared Color magenta = Color(\iMAGENTA);
 
 "The color maroon with an RGB value of #800000."
-shared object maroon extends Color() {
-	createDelegate() => \iMAROON;
-}
+shared Color maroon = Color(\iMAROON);
 
 "The color medium aquamarine with an RGB value of #66CDAA."
-shared object mediumAquamarine extends Color() {
-	createDelegate() => \iMEDIUMAQUAMARINE;
-}
+shared Color mediumAquamarine = Color(\iMEDIUMAQUAMARINE);
 
 "The color medium blue with an RGB value of #0000CD."
-shared object mediumBlue extends Color() {
-	createDelegate() => \iMEDIUMBLUE; 
-}
+shared Color mediumBlue = Color(\iMEDIUMBLUE); 
 
 "The color medium orchid with an RGB value of #BA55D3."
-shared object mediumOrchid extends Color() { 
-	createDelegate() => \iMEDIUMORCHID; 
-}
+shared Color mediumOrchid = Color(\iMEDIUMORCHID); 
 
 "The color medium purple with an RGB value of #9370DB."
-shared object mediumPurple extends Color() {
-	createDelegate() => \iMEDIUMPURPLE; 
-}
+shared Color mediumPurple = Color(\iMEDIUMPURPLE); 
 
 "The color medium sea green with an RGB value of #3CB371."
-shared object mediumSeaGreen extends Color() { 
-	createDelegate() => \iMEDIUMSEAGREEN; 
-}
+shared Color mediumSeaGreen = Color(\iMEDIUMSEAGREEN);
 
 "The color medium slate blue with an RGB value of #7B68EE."
-shared object mediumSlateBlue extends Color() {
-	createDelegate() => \iMEDIUMSLATEBLUE; 
-}
+shared Color mediumSlateBlue = Color(\iMEDIUMSLATEBLUE);
 
 "The color medium spring green with an RGB value of #00FA9A."
-shared object mediumSpringGreen extends Color() { 
-	createDelegate() => \iMEDIUMSPRINGGREEN; 
-}
+shared Color mediumSpringGreen = Color(\iMEDIUMSPRINGGREEN); 
 
 "The color medium turquoise with an RGB value of #48D1CC."
-shared object mediumTurquoise extends Color() {
-	createDelegate() => \iMEDIUMTURQUOISE; 
-}
+shared Color mediumTurquoise = Color(\iMEDIUMTURQUOISE); 
 
 "The color medium violet red with an RGB value of #C71585."
-shared object mediumVioletRed extends Color() {
-	createDelegate() => \iMEDIUMVIOLETRED; 
-}
+shared Color mediumVioletRed = Color(\iMEDIUMVIOLETRED); 
 
 "The color midnight blue with an RGB value of #191970."
-shared object midnightBlue extends Color() { 
-	createDelegate() => \iMIDNIGHTBLUE; 
-}
+shared Color midnightBlue = Color(\iMIDNIGHTBLUE); 
 
 "The color mint cream with an RGB value of #F5FFFA."
-shared object mintCream extends Color() { 
-	createDelegate() => \iMINTCREAM; 
-}
+shared Color mintCream = Color(\iMINTCREAM);
 
 "The color misty rose with an RGB value of #FFE4E1."
-shared object mistyRose extends Color() { 
-	createDelegate() => \iMISTYROSE; 
-}
+shared Color mistyRose = Color(\iMISTYROSE); 
 
 "The color moccasin with an RGB value of #FFE4B5."
-shared object moccasin extends Color() { 
-	createDelegate() => \iMOCCASIN; 
-}
+shared Color moccasin = Color(\iMOCCASIN); 
 
 "The color navajo white with an RGB value of #FFDEAD."
-shared object navajoWhite extends Color() { 
-	createDelegate() => \iNAVAJOWHITE; 
-}
+shared Color navajoWhite = Color(\iNAVAJOWHITE);
 
 "The color navy with an RGB value of #000080."
-shared object navy extends Color() { 
-	createDelegate() => \iNAVY; 
-}
+shared Color navy = Color(\iNAVY); 
 
 "The color old lace with an RGB value of #FDF5E6."
-shared object oldLace extends Color() { 
-	createDelegate() => \iOLDLACE; 
-}
+shared Color oldLace = Color(\iOLDLACE); 
 
 "The color olive with an RGB value of #808000."
-shared object olive extends Color() { 
-	createDelegate() => \iOLIVE; 
-}
+shared Color olive = Color(\iOLIVE); 
 
 "The color olive drab with an RGB value of #6B8E23."
-shared object oliveDrab extends Color() { 
-	createDelegate() => \iOLIVEDRAB; 
-}
+shared Color oliveDrab = Color(\iOLIVEDRAB); 
 
 "The color orange with an RGB value of #FFA500."
-shared object orange extends Color() { 
-	createDelegate() => \iORANGE; 
-}
+shared Color orange = Color(\iORANGE); 
 
 "The color orange red with an RGB value of #FF4500."
-shared object orangeRed extends Color() { 
-	createDelegate() => \iORANGERED; 
-}
+shared Color orangeRed = Color(\iORANGERED); 
 
 "The color orchid with an RGB value of #DA70D6."
-shared object orchid extends Color() { 
-	createDelegate() => \iORCHID; 
-}
+shared Color orchid = Color(\iORCHID); 
 
 "The color pale goldenrod with an RGB value of #EEE8AA."
-shared object paleGoldenRod extends Color() { 
-	createDelegate() => \iPALEGOLDENROD; 
-}
+shared Color paleGoldenRod = Color(\iPALEGOLDENROD); 
 
 "The color pale green with an RGB value of #98FB98."
-shared object paleGreen extends Color() { 
-	createDelegate() => \iPALEGREEN; 
-}
+shared Color paleGreen = Color(\iPALEGREEN); 
 
 "The color pale turquoise with an RGB value of #AFEEEE."
-shared object paleTurquoise extends Color() { 
-	createDelegate() => \iPALETURQUOISE; 
-}
+shared Color paleTurquoise = Color(\iPALETURQUOISE); 
 
 "The color pale violet red with an RGB value of #DB7093."
-shared object paleVioletRed extends Color() { 
-	createDelegate() => \iPALEVIOLETRED; 
-}
+shared Color paleVioletRed = Color(\iPALEVIOLETRED); 
 
 "The color papaya whip with an RGB value of #FFEFD5."
-shared object papayaWhip extends Color() { 
-	createDelegate() => \iPAPAYAWHIP; 
-}
+shared Color papayaWhip = Color(\iPAPAYAWHIP); 
 
 "The color peach puff with an RGB value of #FFDAB9."
-shared object peachPuff extends Color() { 
-	createDelegate() => \iPEACHPUFF; 
-}
+shared Color peachPuff = Color(\iPEACHPUFF); 
 
 "The color peru with an RGB value of #CD853F."
-shared object peru extends Color() { 
-	createDelegate() => \iPERU; 
-}
+shared Color peru = Color(\iPERU); 
 
 "The color pink with an RGB value of #FFC0CB."
-shared object pink extends Color() { 
-	createDelegate() => \iPINK; 
-}
+shared Color pink = Color(\iPINK);
 
 "The color plum with an RGB value of #DDA0DD."
-shared object plum extends Color() { 
-	createDelegate() => \iPLUM; 
-}
+shared Color plum = Color(\iPLUM);
 
 "The color powder blue with an RGB value of #B0E0E6."
-shared object powderBlue extends Color() { 
-	createDelegate() => \iPOWDERBLUE; 
-}
+shared Color powderBlue = Color(\iPOWDERBLUE);
 
 "The color purple with an RGB value of #800080."
-shared object purple extends Color() { 
-	createDelegate() => \iPURPLE; 
-}
+shared Color purple = Color(\iPURPLE);
 
 "The color red with an RGB value of #FF0000."
-shared object red extends Color() { 
-	createDelegate() => \iRED; 
-}
+shared Color red = Color(\iRED);
 
 "The color rosy brown with an RGB value of #BC8F8F."
-shared object rosyBrown extends Color() { 
-	createDelegate() => \iROSYBROWN; 
-}
+shared Color rosyBrown = Color(\iROSYBROWN);
 
 "The color royal blue with an RGB value of #4169E1."
-shared object royalBlue extends Color() { 
-	createDelegate() => \iROYALBLUE; 
-}
+shared Color royalBlue = Color(\iROYALBLUE);
 
 "The color saddle brown with an RGB value of #8B4513."
-shared object saddleBrown extends Color() { 
-	createDelegate() => \iSADDLEBROWN; 
-}
+shared Color saddleBrown = Color(\iSADDLEBROWN);
 
 "The color salmon with an RGB value of #FA8072."
-shared object salmon extends Color() { 
-	createDelegate() => \iSALMON; 
-}
+shared Color salmon = Color(\iSALMON);
 
 "The color sandy brown with an RGB value of #F4A460."
-shared object sandyBrown extends Color() { 
-	createDelegate() => \iSANDYBROWN; 
-}
+shared Color sandyBrown = Color(\iSANDYBROWN);
 
 "The color sea green with an RGB value of #2E8B57."
-shared object seaGreen extends Color() { 
-	createDelegate() => \iSEAGREEN; 
-}
+shared Color seaGreen = Color(\iSEAGREEN);
 
 "The color sea shell with an RGB value of #FFF5EE."
-shared object seaShell extends Color() { 
-	createDelegate() => \iSEASHELL; 
-}
+shared Color seaShell = Color(\iSEASHELL);
 
 "The color sienna with an RGB value of #A0522D."
-shared object sienna extends Color() { 
-	createDelegate() => \iSIENNA; 
-}
+shared Color sienna = Color(\iSIENNA);
 
 "The color silver with an RGB value of #C0C0C0."
-shared object silver extends Color() { 
-	createDelegate() => \iSILVER; 
-}
+shared Color silver = Color(\iSILVER);
 
 "The color sky blue with an RGB value of #87CEEB."
-shared object skyBlue extends Color() { 
-	createDelegate() => \iSKYBLUE; 
-}
+shared Color skyBlue = Color(\iSKYBLUE);
 
 "The color slate blue with an RGB value of #6A5ACD."
-shared object slateBlue extends Color() { 
-	createDelegate() => \iSLATEBLUE; 
-}
+shared Color slateBlue = Color(\iSLATEBLUE);
 
 "The color slate gray with an RGB value of #708090."
-shared object slateGray extends Color() { 
-	createDelegate() => \iSLATEGRAY; 
-}
+shared Color slateGray = Color(\iSLATEGRAY);
 
 "The color slate grey with an RGB value of #708090."
 shared Color slateGrey = slateGray;
 
 "The color snow with an RGB value of #FFFAFA."
-shared object snow extends Color() { 
-	createDelegate() => \iSNOW;
-}
+shared Color snow = Color(\iSNOW);
 
 "The color spring green with an RGB value of #00FF7F."
-shared object springGreen extends Color() { 
-	createDelegate() => \iSPRINGGREEN; 
-}
+shared Color springGreen = Color(\iSPRINGGREEN);
 
 "The color steel blue with an RGB value of #4682B4."
-shared object steelBlue extends Color() { 
-	createDelegate() => \iSTEELBLUE; 
-}
+shared Color steelBlue = Color(\iSTEELBLUE);
 
 "The color tan with an RGB value of #D2B48C."
-shared object tan extends Color() { 
-	createDelegate() => \iTAN; 
-}
+shared Color tan = Color(\iTAN);
 
 "The color teal with an RGB value of #008080."
-shared object teal extends Color() { 
-	createDelegate() => \iTEAL; 
-}
+shared Color teal = Color(\iTEAL);
 
 "The color thistle with an RGB value of #D8BFD8."
-shared object thistle extends Color() { 
-	createDelegate() => \iTHISTLE; 
-}
+shared Color thistle = Color(\iTHISTLE);
 
 "The color tomato with an RGB value of #FF6347."
-shared object tomato extends Color() { 
-	createDelegate() => \iTOMATO; 
-}
+shared Color tomato = Color(\iTOMATO);
 
 "The color turquoise with an RGB value of #40E0D0."
-shared object turquoise extends Color() { 
-	createDelegate() => \iTURQUOISE; 
-}
+shared Color turquoise = Color(\iTURQUOISE);
 
 "The color violet with an RGB value of #EE82EE."
-shared object violet extends Color() { 
-	createDelegate() => \iVIOLET; 
-}
+shared Color violet = Color(\iVIOLET); 
 
 "The color wheat with an RGB value of #F5DEB3."
-shared object wheat extends Color() { 
-	createDelegate() => \iWHEAT; 
-}
+shared Color wheat = Color(\iWHEAT);
 
 "The color white with an RGB value of #FFFFFF."
-shared object white extends Color() { 
-	createDelegate() => \iWHITE; 
-}
+shared Color white = Color(\iWHITE);
 
 "The color white smoke with an RGB value of #F5F5F5."
-shared object whiteSmoke extends Color() { 
-	createDelegate() => \iWHITESMOKE; 
-}
+shared Color whiteSmoke = Color(\iWHITESMOKE);
 
 "The color yellow with an RGB value of #FFFF00."
-shared object yellow extends Color() { 
-	createDelegate() => \iYELLOW; 
-}
+shared Color yellow = Color(\iYELLOW);
 
 "The color yellow green with an RGB value of #9ACD32."
-shared object yellowGreen extends Color() { 
-	createDelegate() => \iYELLOWGREEN; 
-}
+shared Color yellowGreen = Color(\iYELLOWGREEN);
