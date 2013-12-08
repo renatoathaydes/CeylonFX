@@ -3,49 +3,40 @@ import ceylonfx.application {
 }
 import ceylonfx.binding {
 	BooleanProperty,
-	WritableStringProperty,
-	ObjectProperty
+	ObjectProperty,
+	StringProperty
 }
-import ceylonfx.scene.paint { Paint }
+import ceylonfx.scene.paint {
+	Paint,
+	black
+}
+
 import javafx.scene.control {
 	JCheckBox=CheckBox
 }
-import javafx.scene.paint {
-	JPaint=Paint
-}
-import ceylonfx.scene.paint.utils { toCeylonPaint }
 
 shared class CheckBox(
+	Boolean state = false,
 	String initialText = "",
-	Boolean allowIndeterminate = false)
+	Boolean allowIndeterminate = false,
+	Paint textFill = black)
 		extends CeylonFxAdapter<JCheckBox>() {
+	
+	shared BooleanProperty selectedProperty = ObjectProperty(state);
+	shared ObjectProperty<Paint> textFillProperty = ObjectProperty(textFill);
+	shared StringProperty textProperty = ObjectProperty(initialText);
 	
 	shared actual JCheckBox createDelegate() {
 		value actualBox = JCheckBox(initialText);
 		actualBox.allowIndeterminate = allowIndeterminate;
+		glueProperties(actualBox);
 		return actualBox; 
 	}
 	
-	shared Boolean selected => delegate.selected;
-	
-	assign selected {
-		delegate.selected = selected;
+	void glueProperties(JCheckBox delegate) {
+		selectedProperty.onChange((Boolean selected) => delegate.selected = selected);
+		textFillProperty.onChange((Paint textFill) => delegate.textFill = textFill.delegate);
+		textProperty.onChange((String text) => delegate.text = text);
 	}
 	
-	shared BooleanProperty selectedProperty => BooleanProperty(delegate.selectedProperty());
-
-	shared ObjectProperty<Paint, JPaint> textFillProperty =>
-			ObjectProperty<Paint, JPaint>(delegate.textFillProperty(), toCeylonPaint);
-	
-	shared WritableStringProperty textProperty => WritableStringProperty(delegate.textProperty());
-	
-	shared String text => delegate.text;
-	
-	assign text {
-		delegate.text = text;
-	}
-	
-	shared void updateText(String newText) {
-		delegate.text = newText;
-	}
 }

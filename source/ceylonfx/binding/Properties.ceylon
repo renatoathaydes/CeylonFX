@@ -1,108 +1,72 @@
-import ceylonfx.application.java {
-	CeylonListener,
-	Converters {
-		fromProperty,
-		valueOf
-	},
-	ListenerBridge {
-		convert
-	}
-}
-import ceylonfx.utils {
-	fromJavaBool,
-	booleanJ2C,
-	stringJ2C,
-	integerJ2C,
-	floatJ2C,
-	asTypeConverter
+"A read-only property."
+shared interface Property<out Prop> {
+	"Gets the value of this property."
+	shared formal Prop get;
+	
+	"On change of the value of this property, the given function will be invoked."
+	shared formal void onChange(Anything(Prop) runOnChange);
+	
 }
 
-import java.lang {
-	JBool=Boolean,
-	JString=String,
-	JFloat=Float,
-	JInt=Integer
-}
-
-import javafx.beans.property {
-	JBooleanProp=BooleanProperty,
-	JStringProp=StringProperty,
-	JIntegerProp=IntegerProperty,
-	JFloatProp=FloatProperty,
-	JObjectProp=ObjectProperty
-}
-import javafx.beans.\ivalue {
-	ObservableValue
-}
-
-shared interface FxProperty<Prop> {
-	shared formal Prop get();
-	shared formal void addListener(CeylonListener<Prop> listener);
-}
-
-shared interface FxMutable<in Prop> {
+"A write-only property."
+shared interface Writable<in Prop> {
+	
+	"Sets the value of this property."
 	shared formal void set(Prop prop);
-}
-
-shared class BooleanProperty(shared ObservableValue<JBool> delegate)
-		satisfies FxProperty<Boolean> {
-	get() => fromJavaBool(delegate.\ivalue);
 	
-	addListener(CeylonListener<Boolean> listener) =>
-		delegate.addListener(convert(listener, booleanJ2C));
 }
 
-shared class WritableBooleanProperty(JBooleanProp delegate)
-		satisfies FxMutable<Boolean> {
-	set(Boolean prop) => delegate.set(prop);
-}
-
-shared class StringProperty(shared ObservableValue<JString> delegate)
-		satisfies FxProperty<String> {
-	get() => delegate.\ivalue.string;
+"""A read/write property.
+   It can be exposed as a read-only [[Property]] or a write-only [[Writable]].
+   """
+shared class ObjectProperty<Prop>(Prop prop)
+		satisfies Property<Prop>&Writable<Prop>
+		given Prop satisfies Object {
 	
-	addListener(CeylonListener<String> listener) =>
-		delegate.addListener(convert(listener, stringJ2C));
-}
-
-shared class WritableStringProperty(JStringProp delegate)
-		extends StringProperty(delegate) satisfies FxMutable<String> {
-	set(String prop) => delegate.setValue(prop);
-}
-
-shared class IntegerProperty(shared ObservableValue<JInt> delegate)
-		satisfies FxProperty<Integer> {
-	get() => delegate.\ivalue.intValue();
+	variable Prop property = prop;
+	variable {Anything(Prop)*} toNotify = {};
 	
-	addListener(CeylonListener<Integer> listener) =>
-		delegate.addListener(convert(listener, integerJ2C));
-}
-
-shared class WritableIntegerProperty(JIntegerProp delegate)
-		extends IntegerProperty(fromProperty(delegate)) satisfies FxMutable<Integer> {
-	set(Integer prop) => delegate.set(prop);
-}
-
-shared class FloatProperty(shared ObservableValue<JFloat> delegate)
-		satisfies FxProperty<Float> {
-	get() => delegate.\ivalue.floatValue();
+	get => property;
 	
-	addListener(CeylonListener<Float> listener) =>
-		delegate.addListener(convert(listener, floatJ2C));
-}
-
-shared class WritableFloatProperty(JFloatProp delegate)
-		extends FloatProperty(fromProperty(delegate)) satisfies FxMutable<Float> {
-	set(Float prop) => delegate.set(prop);
-}
-
-shared class ObjectProperty<CeylonType, JavaType>(
-	shared JObjectProp<JavaType> delegate,
-	CeylonType transform(JavaType? type))
-		satisfies FxProperty<CeylonType> {
-	get() => transform(valueOf(delegate));//FIXME this should work, why is it ambiguos?!?! delegate.\ivalue);
+	shared actual void set(Prop prop) {
+		if (prop == property) { return; }
+		property = prop;
+		for (notify in toNotify) {
+			notify(prop);
+		}
+	}
 	
-	addListener(CeylonListener<CeylonType> listener) =>
-		delegate.addListener(convert(listener, asTypeConverter(transform)));
+	shared actual void onChange(Anything(Prop) runOnChange) {
+		toNotify = toNotify.chain({ runOnChange });
+		runOnChange(get);
+	}
+	
 }
 
+shared alias BooleanProperty => ObjectProperty<Boolean>;
+shared alias StringProperty => ObjectProperty<String>;
+shared alias FloatProperty => ObjectProperty<Float>;
+shared alias IntegerProperty => ObjectProperty<Integer>;
+
+shared void bind<Prop>(Property<Prop> from, Writable<Prop> to)
+		given Prop satisfies Object {
+	from.onChange((Prop from) => to.set(from));
+}
+
+shared void bindConverting<From, To>(Property<From> from, Writable<To> to, To(From) transform)
+		given From satisfies Object given To satisfies Object {
+	from.onChange((From from) => to.set(transform(from)));
+}
+
+shared void bindBidirectional<Prop>(ObjectProperty<Prop> prop1, ObjectProperty<Prop> prop2)
+		given Prop satisfies Object {
+	prop1.onChange(prop2.set);
+	prop2.onChange(prop1.set);
+}
+
+shared void bindConvertingBidirectional<Prop1, Prop2>(ObjectProperty<Prop1> prop1, ObjectProperty<Prop2> prop2,
+Prop1(Prop2) transform1, Prop2(Prop1) transform2)
+		given Prop1 satisfies Object given Prop2 satisfies Object {
+	prop1.onChange((Prop1 from) => prop2.set(transform2(from)));
+	prop2.onChange((Prop2 to) => prop1.set(transform1(to)));
+}
