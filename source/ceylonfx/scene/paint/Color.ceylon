@@ -27,7 +27,6 @@ shared Color rgbHexa(Integer hexadecimal, Float opacity = 1.0) {
 	Integer red = hexadecimal / 65536 % 256;
 	Integer green = hexadecimal / 256 % 256;
 	Integer blue = hexadecimal % 256;
-	print("Creating color ``red`` ``green`` ``blue``");
 	return rgb(red, green, blue, opacity);
 }
 
