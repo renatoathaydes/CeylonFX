@@ -4,21 +4,34 @@ import javafx.scene.paint {
 	}
 } 
 
+"The Color class is used to encapsulate colors in the default sRGB color space."
 shared class Color(JColor jColor) 
 		extends Paint() {
 	shared actual JColor createDelegate() => jColor;
 }
 
+"Creates a grey color."
 shared Color grayShade(Float gray, Float opacity = 1.0) 
 		=> Color(JColor.gray(gray, opacity));
 
+"Creates an sRGB color with the specified RGB values in the range 0-255, and a given opacity."
 shared Color rgb(Integer red, Integer green, Integer blue, Float opacity = 1.0) 
 		=> Color(JColor.rgb(red, green, blue, opacity));
 
+"Creates an RGB color specified with an HTML or CSS attribute string."
 shared Color web(String colorString, Float opacity = 1.0) 
 		=> Color(JColor.web(colorString, opacity));
 
-"A fully transparent color with an ARGB value of #00000000."
+"Creates an sRGB color with the specified RGB values in the range #00_00_00 and #FF_FF_FF, and a given opacity."
+shared Color rgbHexa(Integer hexadecimal, Float opacity = 1.0) {
+	Integer red = hexadecimal / 65536 % 256;
+	Integer green = hexadecimal / 256 % 256;
+	Integer blue = hexadecimal % 256;
+	print("Creating color ``red`` ``green`` ``blue``");
+	return rgb(red, green, blue, opacity);
+}
+
+"A fully transparent color with an RGB value of #00000000."
 shared Color transparent = Color(\iTRANSPARENT);
 
 "The color alice blue with an RGB value of #F0F8FF."
