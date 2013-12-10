@@ -1,4 +1,9 @@
-import javafx.scene.effect { JBlendMode=BlendMode }
+import javafx.scene.effect { JBlendMode=BlendMode, JEffect=Effect }
+import ceylonfx.application { CeylonFxAdapter }
+
+"The abstract base class for all effect implementations. An effect is a graphical algorithm that produces an image, typically as a modification of a source image."
+shared abstract class Effect()
+		extends CeylonFxAdapter<JEffect>() {}
 
 "A blending mode defines the manner in which the inputs of a Blend effect are composited together or how a Node is blended into the background of a scene. "
 shared abstract class BlendMode(shared JBlendMode delegate)
