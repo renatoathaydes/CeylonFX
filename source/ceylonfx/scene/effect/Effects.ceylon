@@ -1,7 +1,12 @@
 import javafx.scene.effect { JBlendMode=BlendMode }
 
 "A blending mode defines the manner in which the inputs of a Blend effect are composited together or how a Node is blended into the background of a scene. "
-class BlendMode(shared JBlendMode delegate) {}
+abstract class BlendMode(shared JBlendMode delegate)
+		of addBlendMode|blueBlendMode|colorBurnBlendMode|colorDodgeBlendMode|
+		darkenBlendMode|differenceBlendMode|exclusionBlendMode|greenBlendMode|
+		hardLightBlendMode|lightenBlendMode|multiplyBlendMode|overlayBlendMode|
+		redBlendMode|screenBlendMode|softLightBlendMode|srcAtopBlendMode|
+		srcOverBlendMode {}
 
 "The color and alpha components from the top input are added to those from the bottom input."
 object addBlendMode extends BlendMode(JBlendMode.\iADD) {}
