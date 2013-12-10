@@ -6,9 +6,17 @@ import ceylonfx.binding {
 	ObjectProperty,
 	StringProperty
 }
+import ceylonfx.binding.internal {
+	bindToJavaFx
+}
 import ceylonfx.scene.paint {
 	Paint,
 	black
+}
+import ceylonfx.utils {
+	booleanJ2C,
+	stringJ2C,
+	paintJ2C
 }
 
 import javafx.scene.control {
@@ -37,6 +45,10 @@ shared class CheckBox(
 		selectedProperty.onChange((Boolean selected) => delegate.selected = selected);
 		textFillProperty.onChange((Paint textFill) => delegate.textFill = textFill.delegate);
 		textProperty.onChange((String text) => delegate.text = text);
+		
+		bindToJavaFx(delegate.selectedProperty(), selectedProperty, booleanJ2C);
+		bindToJavaFx(delegate.textFillProperty(), textFillProperty, paintJ2C);
+		bindToJavaFx(delegate.textProperty(), textProperty, stringJ2C);
 	}
 	
 }

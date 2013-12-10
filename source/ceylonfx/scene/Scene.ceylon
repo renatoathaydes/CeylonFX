@@ -1,34 +1,43 @@
 import ceylonfx.application {
-    CeylonFxAdapter,
-    CeylonNode,
-    asNodes
+	CeylonFxAdapter,
+	CeylonNode,
+	asNodes
+}
+import ceylonfx.binding {
+	Binding,
+	ObjectProperty
 }
 import ceylonfx.geometry {
-    Dimension
+	Dimension
 }
 import ceylonfx.scene.paint {
-    Paint,
-    white
+	Paint,
+	white
 }
 
 import javafx.scene {
-    Node,
-    JScene=Scene,
-    Group
+	Node,
+	JScene=Scene,
+	Group
 }
 
 shared class Scene(
     Dimension dimension = [600.0, 400.0],
-    Paint fill = white,
+    Paint|Binding<Object, Paint> fill = white,
     Boolean depthBuffer = false,
     {Node|CeylonNode*} children = [])
         extends CeylonFxAdapter<JScene>() {
+    
+    shared ObjectProperty<Paint> fillProperty = ObjectProperty<Paint>(white);
     
     shared actual JScene createDelegate() {
         Group root = Group();
         root.children.setAll(*asNodes(children));
         value jscene = JScene(root, dimension[0], dimension[1], depthBuffer);
-        jscene.fill = fill.delegate;
+        fillProperty.onChange((Paint paint) => jscene.fill = paint.delegate);
+        switch(fill)
+        case (is Paint) { fillProperty.set(fill); }
+        case (is Binding<Object, Paint>) { fill.bind(fillProperty); }
         return jscene;
     }
     

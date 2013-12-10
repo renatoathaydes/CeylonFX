@@ -1,8 +1,31 @@
-import java.lang { Runnable, Bool=Boolean, JString=String, JFloat=Float, JInt=Integer }
-import javafx.application { Platform }
-import java.util.concurrent { CountDownLatch }
-import ceylonfx.application.java { TypeConverter }
-import ceylon.interop.java { javaString }
+import ceylon.interop.java {
+	javaString
+}
+
+import ceylonfx.application.java {
+	TypeConverter
+}
+import ceylonfx.scene.paint {
+	Paint
+}
+
+import java.lang {
+	Runnable,
+	Bool=Boolean,
+	JString=String,
+	JFloat=Float,
+	JInt=Integer
+}
+import java.util.concurrent {
+	CountDownLatch
+}
+
+import javafx.application {
+	Platform
+}
+import javafx.scene.paint {
+	JPaint=Paint
+}
 
 shared object booleanC2J satisfies TypeConverter<Boolean, Bool> {
 	shared actual Bool convert(Boolean from) => from then Bool.\iTRUE else Bool.\iFALSE;
@@ -36,8 +59,17 @@ shared object floatJ2C satisfies TypeConverter<JFloat, Float> {
 	shared actual Float convert(JFloat from) => from.floatValue();
 }
 
+shared object paintJ2C satisfies TypeConverter<JPaint, Paint> {
+	shared actual Paint convert(JPaint from) {
+		object paint extends Paint() {
+			createDelegate() => from;
+		}
+		return paint;
+	}
+}
+
 shared TypeConverter<JavaType, CeylonType> asTypeConverter<JavaType, CeylonType>(
-		CeylonType transform(JavaType? from)) {
+	CeylonType transform(JavaType? from)) {
 	object converter satisfies TypeConverter<JavaType, CeylonType> { 
 		shared actual CeylonType convert(JavaType? from) => transform(from);
 	}
@@ -63,11 +95,4 @@ shared Runnable asRunnable(Anything toRun(Object* args)) {
 		shared actual void run() { toRun(); }
 	}
 	return runnable;
-}
-
-shared Boolean fromJavaBool(Bool? boolean) {
-	if (exists b = boolean) {
-		return b.booleanValue();
-	}
-	return false;
 }
