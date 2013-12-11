@@ -89,8 +89,10 @@ Prop1(Prop2) transform1, Prop2(Prop1) transform2)
          checkBox
      };
  "
-shared class Binding<out From, out To>(ObjectProperty<From> -> To(From) bindEntry)
-		given From satisfies Object given To satisfies Object {
+shared class Binding<out From, out To>
+        (ObjectProperty<From> -> To(From) bindEntry)
+		given From satisfies Object 
+        given To satisfies Object {
 	
 	shared void bind(Writable<To> to) {
 		bindConverting(bindEntry.key, to, bindEntry.item);

@@ -52,9 +52,21 @@ void vBox() {
 				VBox {
 					minimumSize = [500.0, 500.0];
 					spacing = 10;
-					Rectangle{ dimension = [250.0, 50.0]; fill = red; },
-					VGrowNode(Rectangle{ dimension = [250.0, 50.0]; fill = yellow; }, always),
-					Rectangle{ dimension = [250.0, 50.0]; fill = red; }
+					Rectangle {
+						dimension = [250.0, 50.0];
+						fill = red;
+					},
+					VGrowNode {
+						vgrow=always;
+						node=Rectangle{
+							dimension = [250.0, 50.0]; 
+							fill = yellow;
+						}; 
+					},
+					Rectangle {
+						dimension = [250.0, 50.0]; 
+						fill = red;
+					}
 				}
 			};
 		};
@@ -73,7 +85,8 @@ void checkBox() {
 		Stage {
 			title = "VBox sample";
 			Scene {
-				fill = Binding(checkBox.selectedProperty -> ((Boolean sel) => sel then white else black));
+				fill = Binding(checkBox.selectedProperty -> 
+						((Boolean sel) => sel then white else black));
 				checkBox
 			};
 		};
