@@ -36,6 +36,8 @@ CeylonFX {
 };
 ```
 
+See more [here](samples/samples/run.ceylon)!
+
 ## Getting started
 
 ### Let Ceylon know about JavaFX
