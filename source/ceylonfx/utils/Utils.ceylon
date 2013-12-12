@@ -96,3 +96,11 @@ shared Runnable asRunnable(Anything toRun(Object* args)) {
 	}
 	return runnable;
 }
+
+shared Boolean nullSafeEquals(Anything item1, Anything item2) {
+	if (exists item1, exists item2) {
+		return item1 == item2;
+	} else {
+		return (item1 exists) == (item2 exists);
+	}
+}
