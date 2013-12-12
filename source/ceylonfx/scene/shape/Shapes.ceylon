@@ -1,16 +1,21 @@
-import ceylonfx.application {
-	CeylonFxAdapter
-}
 import ceylonfx.geometry {
-	Location,
 	Dimension
+}
+import ceylonfx.scene {
+	Node
 }
 import ceylonfx.scene.paint {
 	Paint,
 	white,
 	black
 }
+import ceylonfx.scene.utils {
+	initNode
+}
 
+import javafx.scene {
+	JNode=Node
+}
 import javafx.scene.shape {
 	JShape=Shape,
 	JRect=Rectangle,
@@ -74,7 +79,7 @@ shared object roundLineJoin extends StrokeLineJoin(JStrokeLJ.\iROUND) {}
 
 "The Shape class provides definitions of common properties for objects that represent some
  form of geometric shape."
-shared abstract class Shape(
+shared abstract class Shape<Type>(
 	shared Paint fill,
 	shared Boolean smooth,
 	shared Float strokeDashOffset,
@@ -84,8 +89,9 @@ shared abstract class Shape(
 	shared Paint? stroke,
 	shared StrokeType strokeType,
 	shared Float strokeWidth)
-		extends CeylonFxAdapter<JShape>() {
-
+		extends Node<Type>()
+		given Type satisfies JNode {
+	
 	shared void transferPropertiesTo(JShape jshape) {
 		jshape.fill = fill.delegate;
 		jshape.smooth = smooth;
@@ -104,7 +110,6 @@ shared abstract class Shape(
  Rounded corners can be specified using the arcWidth and arcHeight variables. "
 shared class Rectangle(
 	shared Dimension dimension = [0.0, 0.0],
-	shared Location location = [0.0, 0.0],
 	shared Float arcWidth = 0.0,
 	shared Float arcHeight = 0.0,
 	Paint fill = white,
@@ -116,11 +121,13 @@ shared class Rectangle(
 	Paint? stroke = black,
 	StrokeType strokeType = centeredStroke,
 	Float strokeWidth = 1.0)
-		extends Shape(fill, smooth, strokeDashOffset, strokeLineCap, strokeLineJoin,
-			strokeMiterLimit, stroke, strokeType, strokeWidth) {
+		extends Shape<JRect>(
+		fill, smooth, strokeDashOffset, strokeLineCap, strokeLineJoin,
+		strokeMiterLimit, stroke, strokeType, strokeWidth) {
 	
 	shared actual JRect createDelegate() {
 		value actual = JRect();
+		initNode(this, actual);
 		actual.width = dimension[0];
 		actual.height = dimension[1];
 		actual.x = location[0];
