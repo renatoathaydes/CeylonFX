@@ -23,7 +23,7 @@ shared interface Writable<in Prop> {
    """
 shared class ObjectProperty<Prop>(Prop prop)
 		satisfies Property<Prop>&Writable<Prop> {
-	
+
 	variable Prop property = prop;
 	variable {Anything(Prop)*} toNotify = {};
 	
@@ -91,6 +91,10 @@ shared class Binding<out From, out To>
 	"Provide the property to bind to."
 	shared void bind(Writable<To> to) {
 		bindConverting(bindEntry.key, to, bindEntry.item);
+	}
+	
+	shared From bindeeValue() {
+		return bindEntry.key.get;
 	}
 	
 }
