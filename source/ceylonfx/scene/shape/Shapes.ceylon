@@ -9,15 +9,14 @@ import ceylonfx.scene.paint {
 	white,
 	black
 }
-import ceylonfx.scene.utils {
-	initNode
+import ceylonfx.scene.shape.utils {
+	transferProperties
 }
 
 import javafx.scene {
 	JNode=Node
 }
 import javafx.scene.shape {
-	JShape=Shape,
 	JRect=Rectangle,
 	JStrokeType=StrokeType,
 	JStrokeLC=StrokeLineCap,
@@ -79,7 +78,7 @@ shared object roundLineJoin extends StrokeLineJoin(JStrokeLJ.\iROUND) {}
 
 "The Shape class provides definitions of common properties for objects that represent some
  form of geometric shape."
-shared abstract class Shape<Type>(
+shared abstract class Shape<out Type>(
 	shared Paint fill,
 	shared Boolean smooth,
 	shared Float strokeDashOffset,
@@ -90,20 +89,7 @@ shared abstract class Shape<Type>(
 	shared StrokeType strokeType,
 	shared Float strokeWidth)
 		extends Node<Type>()
-		given Type satisfies JNode {
-	
-	shared void transferPropertiesTo(JShape jshape) {
-		jshape.fill = fill.delegate;
-		jshape.smooth = smooth;
-		jshape.strokeDashOffset = strokeDashOffset;
-		jshape.strokeLineCap = strokeLineCap.delegate;
-		jshape.strokeLineJoin = strokeLineJoin.delegate;
-		jshape.strokeMiterLimit = strokeMiterLimit;
-		if (exists stroke) { jshape.stroke = stroke.delegate; }
-		jshape.strokeType = strokeType.delegate;
-		jshape.strokeWidth = strokeWidth;
-	}
-}
+		given Type satisfies JNode {}
 
 "The Rectangle class defines a rectangle with the specified size and location.
  By default the rectangle has sharp corners.
@@ -127,14 +113,13 @@ shared class Rectangle(
 	
 	shared actual JRect createDelegate() {
 		value actual = JRect();
-		initNode(this, actual);
 		actual.width = dimension[0];
 		actual.height = dimension[1];
 		actual.x = location[0];
 		actual.y = location[1];
 		actual.arcWidth = arcWidth;
 		actual.arcHeight = arcHeight;
-		transferPropertiesTo(actual);
+		transferProperties(this, actual);
 		return actual;
 	}
 	

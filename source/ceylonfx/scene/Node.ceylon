@@ -3,20 +3,21 @@ import ceylonfx.application {
 }
 import ceylonfx.binding {
 	Binding,
-	ObjectProperty
+	ObjectProperty, Property
 }
 import ceylonfx.geometry {
-	Location,
-	Point3D
+	Location, Point3D, Bounds, BoundingBox
 }
 import ceylonfx.scene.effect {
 	BlendMode,
 	Effect
 }
-
 import javafx.scene {
 	JNode=Node
 }
+import javafx.geometry { JBounds=Bounds }
+import ceylonfx.binding.internal { bindToJavaFx }
+import ceylonfx.geometry.util { boundingBoxJ2C }
 
 "Base class for scene graph nodes."
 shared abstract class Node<out Delegate>(
@@ -66,6 +67,16 @@ shared abstract class Node<out Delegate>(
 	if (is Binding<Object, Effect> effect) {
 		effect.bind(effectProperty);
 	}
+	
+	object boundsInLocalProperty extends CeylonFxAdapter<Property<Bounds<JBounds>>>() {
+		shared actual Property<Bounds<JBounds>> createDelegate() {
+			value property = ObjectProperty<Bounds<JBounds>>(BoundingBox([0.0, 0.0], [0.0, 0.0]));
+			bindToJavaFx(outer.delegate.boundsInLocalProperty(), property, boundingBoxJ2C);
+			return property;
+		}
+	}
+	
+	shared Property<Bounds<JBounds>> boundsInLocal => boundsInLocalProperty.delegate;
 	
 	//TODO implement methods, including read-only properties not declared in the constructor
 	

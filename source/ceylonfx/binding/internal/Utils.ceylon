@@ -10,11 +10,11 @@ import ceylonfx.binding {
 }
 
 import javafx.beans.property {
-	Property
+	ReadOnlyProperty
 }
 
 "Used internally by CeylonFX to bind Ceylon properties to their JavaFX counterparts."
-shared void bindToJavaFx<in C, out J>(Property<J> javaProp, Writable<C> ceylonProp, TypeConverter<J, C> converter)
+shared void bindToJavaFx<in C, out J>(ReadOnlyProperty<J> javaProp, Writable<C> ceylonProp, TypeConverter<J, C> converter)
 		given C satisfies Object {
 	object selectedListener satisfies CeylonListener<C> {
 		shared actual void onChange(C? from, C? to) {

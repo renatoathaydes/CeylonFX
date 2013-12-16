@@ -22,6 +22,7 @@ import javafx.scene.text {
 	JTextBoundsType=TextBoundsType,
 	JTextAlignment=TextAlignment
 }
+import ceylonfx.scene.shape.utils { transferProperties }
 
 shared class Text(
 	shared String text,
@@ -56,7 +57,7 @@ shared class Text(
 		jtext.boundsType = textBounds.type;
 		jtext.textAlignment = textAlignment.type;
 		jtext.textOrigin = textOrigin.vpos;
-		transferPropertiesTo(jtext);
+		transferProperties(this, jtext);
 		return jtext;	
 	}
 	

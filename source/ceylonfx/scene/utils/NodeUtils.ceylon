@@ -13,7 +13,7 @@ import javafx.scene {
 	JNode=Node
 }
 
-"All Node sub-classes should call this method when creating their delegate to get proper initialization"
+"All Node direct sub-classes should call this method when creating their delegate to get proper initialization"
 shared void initNode(
 	Node<JNode> node,
 	JNode jnode) {
