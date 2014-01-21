@@ -1,8 +1,9 @@
 import ceylonfx.application {
-	CeylonFX
+	Application
 }
 import ceylonfx.binding {
-	Binding, bindConverting
+	Binding,
+	bindConverting
 }
 import ceylonfx.scene {
 	Scene
@@ -45,7 +46,7 @@ shared void run() {
 }
 
 void vBox() {
-	CeylonFX {
+	Application {
 		Stage {
 			title = "VBox sample";
 			Scene {
@@ -81,7 +82,7 @@ void checkBox() {
 	bindConverting(checkBox.selectedProperty, checkBox.textProperty,
 		(Boolean sel) => sel then "Change to black theme" else "Change to white theme");
 	
-	CeylonFX {
+	Application {
 		Stage {
 			title = "VBox sample";
 			Scene {
@@ -92,5 +93,3 @@ void checkBox() {
 		};
 	};
 }
-
-

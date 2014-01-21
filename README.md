@@ -7,7 +7,7 @@ It is currently under active development. Please contact me if you would like to
 Here's a quick example of what code written with CeylonFX looks like *(this example already works)*:
 
 ```ceylon
-CeylonFX {
+Application {
 	args = process.arguments;
 	Stage {
 		title = "CeylonFX Demo Application";

@@ -1,5 +1,5 @@
 import ceylonfx.application {
-	CeylonFX
+	Application
 }
 import ceylonfx.geometry {
 	center,
@@ -27,7 +27,7 @@ import ceylonfx.stage {
 }
 
 shared void run() 
-		=> CeylonFX {
+		=> Application {
 	args = process.arguments;
 	Stage {
 		title = "CeylonFX Demo Application";

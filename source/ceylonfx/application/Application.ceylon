@@ -16,7 +16,7 @@ import javafx.scene {
 }
 
 "Application class which is the root of all CeylonFX applications."
-shared class CeylonFX(stage, Boolean showNow = true, String?* args) {
+shared class Application(stage, Boolean showNow = true, String?* args) {
 
 	shared Stage stage;
 	
