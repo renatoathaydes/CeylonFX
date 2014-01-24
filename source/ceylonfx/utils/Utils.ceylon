@@ -14,7 +14,8 @@ import java.lang {
 	Bool=Boolean,
 	JString=String,
 	JFloat=Float,
-	JInt=Integer
+	JInt=Integer,
+	Thread
 }
 import java.util.concurrent {
 	CountDownLatch
@@ -76,7 +77,7 @@ shared TypeConverter<JavaType, CeylonType> asTypeConverter<JavaType, CeylonType>
 	return converter;
 }
 
-shared Value? doInFxThread<Value>(Value toRun(Object* args)) {
+shared Value? doInFxThread<Value>(Value() toRun) {
 	variable Value? result = null;
 	CountDownLatch latch = CountDownLatch(1);
 	object runnable satisfies Runnable {
@@ -103,4 +104,10 @@ shared Boolean nullSafeEquals(Anything item1, Anything item2) {
 	} else {
 		return (item1 exists) == (item2 exists);
 	}
+}
+
+"Run the given runnable in a different Thread (might reuse previous Threads)"
+shared void span(Anything() runnable) {
+	//TODO naive approach for now - need a concurrency library
+	Thread(asRunnable((Object* args) => runnable())).start();
 }

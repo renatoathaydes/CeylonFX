@@ -49,7 +49,7 @@ void vBox() {
 	Application {
 		Stage {
 			title = "VBox sample";
-			Scene {
+			() => Scene {
 				VBox {
 					minimumSize = [500.0, 500.0];
 					spacing = 10;
@@ -85,7 +85,7 @@ void checkBox() {
 	Application {
 		Stage {
 			title = "VBox sample";
-			Scene {
+			() => Scene {
 				fill = Binding(checkBox.selectedProperty -> 
 						((Boolean sel) => sel then white else black));
 				checkBox

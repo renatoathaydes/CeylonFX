@@ -10,45 +10,36 @@ import javafx.stage {
 }
 
 "The Stage class is the top level CeylonFX container."
-shared class Stage(scene, stageStyle = decorated, title = "CeylonFX") {
+shared class Stage(shared Scene() scene,
+	shared String title = "CeylonFX") {
 	
-	shared StageStyle stageStyle;
-	shared Scene scene;
-	shared String title;
-	variable JStage? actual = null;
+	variable JStage? jStage = null;
 	
-	shared JStage? delegate => actual;
+	shared JStage? delegate => jStage;
 
 	assign delegate {
-		if (exists delegate) {
-			actual = delegate;
-			delegate.title = title;
-			delegate.scene = scene.delegate;
-		}
+		"Cannot set Stage delegate to null"
+		assert(exists delegate);
 		
+		jStage = delegate;
+		delegate.title = title;
+		delegate.scene = scene().delegate;
 	}
-
+	
 }
 
-JStageStyle forJava(StageStyle style) {
-	switch (style)
-	case (decorated) { return \iDECORATED; }
-	case (transparent) { return \iTRANSPARENT; }
-	case (undecorated) { return \iUNDECORATED; }
-	case (utility) { return \iUTILITY; }
-}
 
-shared abstract class StageStyle()
+shared abstract class StageStyle(shared JStageStyle delegate)
 		of decorated|transparent|undecorated|utility {}
 
 "Defines a normal Stage style with a solid white background and platform decorations."
-shared object decorated extends StageStyle() {}
+shared object decorated extends StageStyle(\iDECORATED) {}
 
 "Defines a Stage style with a transparent background and no decorations."
-shared object transparent extends StageStyle() {}
+shared object transparent extends StageStyle(\iTRANSPARENT) {}
 
 "Defines a Stage style with a solid white background and no decorations."
-shared object undecorated extends StageStyle() {}
+shared object undecorated extends StageStyle(\iUNDECORATED) {}
 
 "Defines a Stage style with a solid white background and minimal platform decorations used for a utility window."
-shared object utility extends StageStyle() {}
+shared object utility extends StageStyle(\iUTILITY) {}

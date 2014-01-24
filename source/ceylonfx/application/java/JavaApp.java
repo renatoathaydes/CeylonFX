@@ -13,7 +13,6 @@ public class JavaApp extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stageHolder.add(stage);
-		stage.show();
 	}
 
 	public static Stage initialize(final String... args) throws InterruptedException {

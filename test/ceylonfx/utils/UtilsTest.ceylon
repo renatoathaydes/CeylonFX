@@ -2,9 +2,53 @@ import ceylon.test {
 	...
 }
 
+import ceylonfx.application {
+	Application
+}
+import ceylonfx.scene {
+	Scene
+}
+import ceylonfx.scene.paint {
+	red
+}
+import ceylonfx.scene.shape {
+	Rectangle
+}
+import ceylonfx.stage {
+	Stage
+}
 
-test void canRunInFxThread() {
+import java.util.concurrent {
+	CountDownLatch,
+	TimeUnit
+}
 
+import javafx.application {
+	Platform
+}
+
+
+test void canRunInFxThreadBlocking() {
+	value app = Application {
+		Stage {
+			() => Scene {
+				Rectangle {
+					dimension = [300.0, 300.0];
+					fill = red;
+				}
+			};
+		};
+	};
+	
+	value taskCounter = CountDownLatch(1);
+	span( void() {
+		doInFxThread(() => taskCounter.countDown());
+	});
+	
+	value taskCompleted = taskCounter.await(5, TimeUnit.\iSECONDS);
+	Platform.runLater(asRunnable((Object* args) => app.close()));
+	
+	assertTrue(taskCompleted);
 }
 
 test void testNullSafeEquals() {

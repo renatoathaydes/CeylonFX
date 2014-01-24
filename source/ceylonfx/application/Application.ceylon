@@ -16,31 +16,37 @@ import javafx.scene {
 }
 
 "Application class which is the root of all CeylonFX applications."
-shared class Application(stage, Boolean showNow = true, String?* args) {
-
-	shared Stage stage;
+shared class Application(
+	shared Stage stage,
+	Boolean showNow = true,
+	String?* args) {
 	
 	print("Created CeylonApp");
 	value actualStage = initialize(*args);
 	
-	doInFxThread(void(Object* args) {
+	doInFxThread(void() {
 		stage.delegate = actualStage;
 		if (exists d = stage.delegate) {
 			print("App started!!!");
 			if (showNow) {
 				d.centerOnScreen();
+				d.show();
 			}
 		} else {
 			throw Exception("Could not start CeylonFX Application");	
 		}
 	});
-		
+	
 	shared void show() {
 		actualStage.show();
 	}
 	
 	shared void hide() {
 		actualStage.hide();
+	}
+	
+	shared void close() {
+		actualStage.close();
 	}
 	
 }
@@ -90,7 +96,7 @@ shared {Node*} asNodes({Node|CeylonNode*} mixed) {
 }
 
 shared Type? asType<out Type>(Type|CeylonFxAdapter<Type> toConvert)
-	given Type satisfies Object {
+		given Type satisfies Object {
 	if (is Type toConvert) {
 		return toConvert;
 	}
