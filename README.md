@@ -11,7 +11,7 @@ Application {
 	args = process.arguments;
 	Stage {
 		title = "CeylonFX Demo Application";
-		Scene {
+		() => Scene {
 			fill = black;
 			dimension = [600.0, 150.0];
 			VBox {
