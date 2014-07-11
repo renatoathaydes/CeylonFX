@@ -48,13 +48,22 @@ I hope it's ok for me to distribute the JavaFX jar in such way because anyway, J
 
 ### Importing the CeylonFX module
 
-Unfortunately, for now you will have to clone this project using git and install it in your local machine with Ceylon tools.
+Currently, here's what you need to do from the command-line:
 
-However, once we have something that is more or less complete, we will try to make this project available from [Ceylon Herd](http://modules.ceylon-lang.org/).
+```
+git clone git@github.com:renatoathaydes/CeylonFX.git
+cd CeylonFX
+ceylon compile --out +USER ceylonfx
+```
 
-You can then add this declaration to your Ceylon module:
+Once we have something that is more or less complete, we will try to make this project available from [Ceylon Herd](http://modules.ceylon-lang.org/) so you won't need to do any of this.
+
+
+You should then add this declaration to your Ceylon module:
 
 ```ceylon
 import ceylonfx "2.2.0"
 ```
+
+And that's it! You're ready to start using CeylonFX in your project.
 
