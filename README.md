@@ -58,6 +58,8 @@ ceylon compile --out +USER ceylonfx
 
 Once we have something that is more or less complete, we will try to make this project available from [Ceylon Herd](http://modules.ceylon-lang.org/) so you won't need to do any of this.
 
+>> To run the demo code shown above, just type ``ceylon run ceylonfx``.
+
 
 You should then add this declaration to your Ceylon module:
 
@@ -66,4 +68,28 @@ import ceylonfx "2.2.0"
 ```
 
 And that's it! You're ready to start using CeylonFX in your project.
+
+
+## CeylonFX samples
+
+A few basic CeylonFX samples can be found in the [samples](samples/samples/) directory.
+
+To compile the samples module, go to the CeylonFX root directory and type:
+
+```
+ceylon compile --src samples/ samples
+```
+
+To see a list of available samples, just type:
+
+```
+ceylon run samples
+```
+
+
+To run a sample, ``checkbox`` for example, run:
+
+```
+ceylon run samples checkbox
+```
 
