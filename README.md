@@ -2,7 +2,9 @@
 
 CeylonFX is a Ceylon interface for JavaFX.
 
-It is currently under active development. Please contact me if you would like to contribute!
+**Development is currently stopped**.
+
+Please contact me if you would like to contribute or even take over this project!
 
 Here's a quick example of what code written with CeylonFX looks like *(this example already works)*:
 
