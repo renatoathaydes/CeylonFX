@@ -1,8 +1,10 @@
-#CeylonFX
+# CeylonFX
 
 CeylonFX is a Ceylon interface for JavaFX.
 
-**Development is currently stopped**.
+## Development of CeylonFX has been migrated to https://github.com/ceylonfx/ceylonfx
+
+~~ **Development is currently stopped**.
 
 Please contact me if you would like to contribute or even take over this project!
 
@@ -93,5 +95,5 @@ To run a sample, ``checkbox`` for example, run:
 
 ```
 ceylon run samples checkbox
-```
+``` ~~
 
