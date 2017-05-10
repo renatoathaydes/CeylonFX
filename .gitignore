@@ -1,4 +1,4 @@
-/modules
+/modules/
 /classes
 *.class
 .ceylon
