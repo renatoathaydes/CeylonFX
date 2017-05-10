@@ -1,4 +1,4 @@
-#CeylonFX
+# CeylonFX
 
 CeylonFX is a Ceylon interface for JavaFX.
 
@@ -95,3 +95,8 @@ To run a sample, ``checkbox`` for example, run:
 ceylon run samples checkbox
 ```
 
+## Licensing
+
+The JavaFX binary and source distribution is licenced under the GPLv2
+
+Other code are licensed under <??>

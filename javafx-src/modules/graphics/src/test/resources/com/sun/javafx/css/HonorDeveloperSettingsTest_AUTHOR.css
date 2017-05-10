@@ -1,0 +1,16 @@
+
+.root { -fx-font: 20 Amble; }
+
+/* 
+ * setting stroke width to 1em will cause CSS to lookup the
+ * inherited font. 
+ */
+#text { -fx-stroke: red; -fx-stroke-width: 1em; }
+#rectangle { -fx-stroke: red; -fx-stroke-width: 1em; }
+
+#rt-20686-author { -fx-font-smoothing-type: lcd; }
+
+/* FontTypeTest testRT_32551 */
+#test-rt-32551 { -fx-font-style: italic; }
+
+#test-rt-29773 { -fx-font-family: 'Amble Cn'; }

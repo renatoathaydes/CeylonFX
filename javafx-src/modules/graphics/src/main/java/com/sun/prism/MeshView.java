@@ -1,0 +1,54 @@
+/*
+ * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
+
+package com.sun.prism;
+
+import javafx.scene.shape.CullFace;
+
+/**
+ * TODO: 3D - Need documentation
+ * This class represents new retained mode rendering object
+ * it has a { mesh, material, position, lights and other common rendering properties
+ */
+public interface MeshView {
+
+    public final static int CULL_NONE = CullFace.NONE.ordinal();
+    public final static int CULL_BACK = CullFace.BACK.ordinal();
+    public final static int CULL_FRONT = CullFace.FRONT.ordinal();
+
+    public void setCullingMode(int mode);
+
+    public void setMaterial(Material material);
+
+    public void setWireframe(boolean wireframe);
+
+    public void setAmbientLight(float r, float g, float b);
+
+    public void setPointLight(int index,
+            float x, float y, float z,
+            float r, float g, float b, float w);
+
+    public void render(Graphics g);
+}

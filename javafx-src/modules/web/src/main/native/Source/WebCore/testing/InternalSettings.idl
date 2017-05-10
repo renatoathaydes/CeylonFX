@@ -1,0 +1,63 @@
+/*
+ * Copyright (C) 2012 Google Inc. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1.  Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 2.  Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL APPLE OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+[
+    NoInterfaceObject,
+    OmitConstructor,
+    JSGenerateToJSObject
+] interface InternalSettings : InternalSettingsGenerated {
+    void setMockScrollbarsEnabled(boolean enabled) raises(DOMException);
+    void setTouchEventEmulationEnabled(boolean enabled) raises(DOMException);
+    void setShadowDOMEnabled(boolean enabled) raises(DOMException);
+    void setAuthorShadowDOMForAnyElementEnabled(boolean isEnabled);
+    void setStyleScopedEnabled(boolean isEnabled);
+    void setStandardFontFamily(DOMString family, DOMString script) raises(DOMException);
+    void setSerifFontFamily(DOMString family, DOMString script) raises(DOMException);
+    void setSansSerifFontFamily(DOMString family, DOMString script) raises(DOMException);
+    void setFixedFontFamily(DOMString family, DOMString script) raises(DOMException);
+    void setCursiveFontFamily(DOMString family, DOMString script) raises(DOMException);
+    void setFantasyFontFamily(DOMString family, DOMString script) raises(DOMException);
+    void setPictographFontFamily(DOMString family, DOMString script) raises(DOMException);
+    void setTextAutosizingEnabled(boolean enabled) raises(DOMException);
+    void setTextAutosizingWindowSizeOverride(long width, long height) raises(DOMException);
+    void setTextAutosizingFontScaleFactor(float fontScaleFactor) raises(DOMException);
+    void setMediaTypeOverride(DOMString mediaTypeOverride) raises(DOMException);
+    void setCSSExclusionsEnabled(boolean enabled) raises(DOMException);
+    void setCSSVariablesEnabled(boolean enabled) raises(DOMException);
+        boolean cssVariablesEnabled() raises(DOMException);
+    void setCanStartMedia(boolean enabled) raises(DOMException);
+    void setEditingBehavior(DOMString behavior) raises(DOMException);
+    void setDialogElementEnabled(boolean enabled) raises(DOMException);
+    void setLangAttributeAwareFormControlUIEnabled(boolean enabled);
+
+    [Conditional=VIDEO_TRACK] void setShouldDisplayTrackKind(DOMString kind, boolean enabled) raises (DOMException);
+    [Conditional=VIDEO_TRACK] boolean shouldDisplayTrackKind(DOMString trackKind) raises (DOMException);
+    void setStorageBlockingPolicy(DOMString policy) raises(DOMException);
+    void setImagesEnabled(boolean enabled) raises(DOMException);
+    void setMinimumTimerInterval(double intervalInSeconds) raises(DOMException);
+    void setDefaultVideoPosterURL(DOMString poster) raises(DOMException);
+    void setTimeWithoutMouseMovementBeforeHidingControls(double time) raises(DOMException);
+    void setUseLegacyBackgroundSizeShorthandBehavior(boolean enabled) raises(DOMException);
+    };
