@@ -4,3 +4,5 @@
 .ceylon
 .project
 .classpath
+.idea/
+*.iml
