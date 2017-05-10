@@ -1,4 +1,4 @@
-#CeylonFX
+# CeylonFX
 
 CeylonFX is a Ceylon interface for JavaFX.
 
@@ -53,13 +53,13 @@ ceylon compile --out +USER ceylonfx
 
 Once we have something that is more or less complete, we will try to make this project available from [Ceylon Herd](http://modules.ceylon-lang.org/) so you won't need to do any of this.
 
->> To run the demo code shown above, just type ``ceylon run ceylonfx``.
+> To run the demo code shown above, just type ``ceylon run ceylonfx``.
 
 
 You should then add this declaration to your Ceylon module:
 
 ```ceylon
-import ceylonfx "2.2.0"
+import ceylonfx "0.2.0"
 ```
 
 And that's it! You're ready to start using CeylonFX in your project.
