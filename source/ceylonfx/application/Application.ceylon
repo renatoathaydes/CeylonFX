@@ -20,10 +20,10 @@ shared class Application(
 	shared Stage stage,
 	Boolean showNow = true,
 	String?* args) {
-	
+
 	print("Created CeylonApp");
 	value actualStage = initialize(*args);
-	
+
 	doInFxThread(void() {
 		stage.delegate = actualStage;
 		if (exists d = stage.delegate) {
@@ -33,22 +33,22 @@ shared class Application(
 				d.show();
 			}
 		} else {
-			throw Exception("Could not start CeylonFX Application");	
+			throw Exception("Could not start CeylonFX Application");
 		}
 	});
-	
+
 	shared void show() {
 		actualStage.show();
 	}
-	
+
 	shared void hide() {
 		actualStage.hide();
 	}
-	
+
 	shared void close() {
 		actualStage.close();
 	}
-	
+
 }
 
 """A bridge class between CeylonFX and the underlying JavaFX framework.
@@ -57,7 +57,7 @@ shared class Application(
    so that it is always possible to reach the JavaFX delegate"""
 shared abstract class CeylonFxAdapter<out Delegate>()
 		given Delegate satisfies Object {
-	
+
 	"""Creates the JavaFX delegate for this CeylonFxAdapter.
 	   This method will be called only once, the first time the delegate is required.
 	   Usually, that should occur when CeylonFX initializes the application, which always
@@ -68,13 +68,13 @@ shared abstract class CeylonFxAdapter<out Delegate>()
 	   
 	   If calling this method directly, **make sure to do so from the JavaFX Thread.**"""
 	shared formal Delegate createDelegate();
-	
+
 	variable Delegate? instance = null;
-	
+
 	doc("Get the JavaFX delegate for this CeylonFxAdapter. The delegate will be created if necessary.")
 	see(`function createDelegate`)
 	shared Delegate delegate => lazyDelegate();
-	
+
 	Delegate lazyDelegate() {
 		if (exists delegate = instance) {
 			return delegate;
@@ -83,7 +83,7 @@ shared abstract class CeylonFxAdapter<out Delegate>()
 			return lazyDelegate();
 		}
 	}
-	
+
 }
 
 "A Ceylon Node"
@@ -100,8 +100,6 @@ shared Type? asType<out Type>(Type|CeylonFxAdapter<Type> toConvert)
 	if (is Type toConvert) {
 		return toConvert;
 	}
-	if (is CeylonFxAdapter<Type> toConvert) {
-		return toConvert.delegate;
-	}
-	return null;
+
+	return toConvert.delegate;
 }

@@ -37,7 +37,7 @@ shared class VBox(
 		if (exists maximumSize) { jvbox.setMaxSize(*maximumSize); }
 		jvbox.children.setAll(*transform(children));
 		if (exists insets, !children.empty) {
-			jvbox.setMargin(jvbox.children.get(0), insets.delegate);
+			JVBox.setMargin(jvbox.children.get(0), insets.delegate);
 		}
 		return jvbox;
 	}
