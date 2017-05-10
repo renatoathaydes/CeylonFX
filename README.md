@@ -98,4 +98,5 @@ ceylon run samples checkbox
 ## Licensing
 
 The JavaFX distribution is licenced under the GPLv2
+
 Other code are licensed under <??>
