@@ -2,9 +2,8 @@
 
 CeylonFX is a Ceylon interface for JavaFX.
 
-**Development is currently stopped**.
-
-Please contact me if you would like to contribute or even take over this project!
+> STATUS: This project is in early stages and is not currently ready for production.
+  Want to help get it ready? Make a pull request or contact me to know how to best contribute!
 
 Here's a quick example of what code written with CeylonFX looks like *(this example already works)*:
 
@@ -41,12 +40,6 @@ Application {
 See more [here](samples/samples/run.ceylon)!
 
 ## Getting started
-
-### Let Ceylon know about JavaFX
-
-Before you can use CeylonFX, you need to make JavaFX available to Ceylon. To do that, simply download [the zip file containing the JavaFX jar](javafx.zip) conveniently wrapped in a Ceylon repo format, then extract the files into your ``{user.home}/.ceylon/repo/`` folder.
-
-I hope it's ok for me to distribute the JavaFX jar in such way because anyway, JavaFX is mostly open-source and the jar can be downloaded for free (please let me know if you think I can't do this legally and I will remove it immediately).
 
 ### Importing the CeylonFX module
 
